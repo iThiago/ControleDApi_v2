@@ -20,7 +20,7 @@ namespace ControleDApi.Controllers
     {
         private Context db = new Context();
 
-        // GET: api/Alimento
+        // GET: api/Alimento 2 5 4 5
         [HttpGet]
         [Route("/GetAlimentos")]
         public IQueryable<Alimento> GetAlimentos()
