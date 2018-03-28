@@ -176,21 +176,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709171659413_firstMigration.cs" />
-    <Compile Include="Migrations\201709171659413_firstMigration.Designer.cs">
-      <DependentUpon>201709171659413_firstMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802221738285_camposObrigatoriosAlimento.cs" />
-    <Compile Include="Migrations\201802221738285_camposObrigatoriosAlimento.Designer.cs">
-      <DependentUpon>201802221738285_camposObrigatoriosAlimento.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802282106178_senha.cs" />
-    <Compile Include="Migrations\201802282106178_senha.Designer.cs">
-      <DependentUpon>201802282106178_senha.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803221445352_perfil.cs" />
-    <Compile Include="Migrations\201803221445352_perfil.Designer.cs">
-      <DependentUpon>201803221445352_perfil.cs</DependentUpon>
+    <Compile Include="Migrations\201803281427579_firstWithIdentity.cs" />
+    <Compile Include="Migrations\201803281427579_firstWithIdentity.Designer.cs">
+      <DependentUpon>201803281427579_firstWithIdentity.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Agendamento.cs" />
@@ -216,17 +204,8 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709171659413_firstMigration.resx">
-      <DependentUpon>201709171659413_firstMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802221738285_camposObrigatoriosAlimento.resx">
-      <DependentUpon>201802221738285_camposObrigatoriosAlimento.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802282106178_senha.resx">
-      <DependentUpon>201802282106178_senha.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803221445352_perfil.resx">
-      <DependentUpon>201803221445352_perfil.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803281427579_firstWithIdentity.resx">
+      <DependentUpon>201803281427579_firstWithIdentity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

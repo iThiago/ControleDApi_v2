@@ -1,4 +1,5 @@
-﻿using ControleDApi.Models;
+﻿using ControleDApi.DAL;
+using ControleDApi.Models;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;

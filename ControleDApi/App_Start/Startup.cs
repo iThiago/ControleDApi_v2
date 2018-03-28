@@ -21,10 +21,11 @@ namespace ControleDApi.App_Start
             app.CreatePerOwinContext(Context.Create);
             app.CreatePerOwinContext<AppUserManager>(AppUserManager.Create);
 
+
             var oAuthServerOptions = new OAuthAuthorizationServerOptions()
             {
                 AllowInsecureHttp = true,
-                TokenEndpointPath = new PathString("/api/login"),
+                TokenEndpointPath = new PathString("/api/Usuario/Login"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromHours(1),
                 Provider = new ControleDAuthorizationServerProvider()
             };
@@ -37,9 +38,9 @@ namespace ControleDApi.App_Start
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
-            name: "DefaultApi",
-            routeTemplate: "api/{controller}/{id}",
-            defaults: new { id = RouteParameter.Optional }
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
             );
         }
     }

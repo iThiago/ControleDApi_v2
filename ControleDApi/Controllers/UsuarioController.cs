@@ -11,6 +11,8 @@ using System.Web.Http.Description;
 using ControleDApi.DAL;
 using ControleDApi.Models;
 using System.Web.Http.Cors;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace ControleDApi.Controllers
 {
@@ -25,7 +27,7 @@ namespace ControleDApi.Controllers
         [Route("/GetUsuario")]
         public IQueryable<Usuario> GetUsuario()
         {
-            return db.Pessoa;
+            return db.Users;
         }
 
         // GET: api/Usuario/5
@@ -34,7 +36,7 @@ namespace ControleDApi.Controllers
         [Route("/GetUsuario")]
         public IHttpActionResult GetUsuario(int id)
         {
-            Usuario pessoa = db.Pessoa.Find(id);
+            Usuario pessoa = db.Users.Find(id);
             if (pessoa == null)
             {
                 return NotFound();
@@ -80,48 +82,55 @@ namespace ControleDApi.Controllers
 
         // POST: api/Usuario
         [ResponseType(typeof(Usuario))]
-        public IHttpActionResult PostPessoa(Usuario usuario)
+        public HttpResponseMessage PostPessoa(Usuario usuario)
         {
+
+            HttpResponseMessage response;
+            string resultado = string.Empty;
+
             try
             {
+                usuario.UserName = "tnsthiago";
 
-                //pessoa.Cpf = (long)Convert.ToInt64(pessoa.Cpf.ToString().Replace(".", "").Replace("-", ""));
+                var userManager = Request.GetOwinContext().GetUserManager<AppUserManager>();
 
-                //if(pessoa.Cpf.ToString().Length != 11)
-                //{
-                //    throw new Exception("Cpf Inválido!");
-                //}
+                IdentityResult result = userManager.Create(usuario, usuario.Senha);
+
+                if (result.Succeeded)
+                    resultado = "Usuario Criado com sucesso";
+                else
+                    resultado = string.Join(",", result.Errors);
+
+                response = Request.CreateResponse(HttpStatusCode.OK, resultado);
+                return response;
 
                 if (!ModelState.IsValid)
                 {
                     var x = BadRequest(ModelState);
-                    return x;
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, x);
                 }
 
-                db.Pessoa.Add(usuario);
+                db.Users.Add(usuario);
                 db.SaveChanges();
-
-
             }
             catch (Exception e)
             {
-                return InternalServerError(e);
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, e);
             }
 
-            return Ok(usuario);
         }
 
         // DELETE: api/Usuario/5
         [ResponseType(typeof(Usuario))]
         public IHttpActionResult DeletePessoa(int id)
         {
-            Usuario pessoa = db.Pessoa.Find(id);
+            Usuario pessoa = db.Users.Find(id);
             if (pessoa == null)
             {
                 return NotFound();
             }
 
-            db.Pessoa.Remove(pessoa);
+            db.Users.Remove(pessoa);
             db.SaveChanges();
 
             return Ok(pessoa);
@@ -138,7 +147,7 @@ namespace ControleDApi.Controllers
 
         private bool PessoaExists(int id)
         {
-            return db.Pessoa.Count(e => e.Id == id) > 0;
+            return db.Users.Count(e => e.Id == id) > 0;
         }
     }
 }

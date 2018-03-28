@@ -7,13 +7,13 @@ namespace ControleDApi.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class camposObrigatoriosAlimento : IMigrationMetadata
+    public sealed partial class firstWithIdentity : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(camposObrigatoriosAlimento));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(firstWithIdentity));
         
         string IMigrationMetadata.Id
         {
-            get { return "201802221738285_camposObrigatoriosAlimento"; }
+            get { return "201803281427579_firstWithIdentity"; }
         }
         
         string IMigrationMetadata.Source
