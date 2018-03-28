@@ -1,4 +1,5 @@
 ﻿using ControleDApi.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -7,7 +8,7 @@ using System.Web;
 
 namespace ControleDApi.DAL
 {
-    public class Context : DbContext
+    public class Context : IdentityDbContext<Usuario>
     {
 
         public Context()
@@ -15,6 +16,10 @@ namespace ControleDApi.DAL
         {
             Configuration.LazyLoadingEnabled = true;
             Configuration.ProxyCreationEnabled = false;
+        }
+        public static Context Create()
+        {
+            return new Context();
         }
 
         public DbSet<Alimento> Alimento { get; set; }
