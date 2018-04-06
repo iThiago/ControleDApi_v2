@@ -15,7 +15,7 @@ using System.Web.Http.Cors;
 namespace ControleDApi.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    [RoutePrefix("/Alimento")]
+    [RoutePrefix("Alimento")]
     public class AlimentoController : ApiController
     {
         private Context db = new Context();
@@ -23,6 +23,7 @@ namespace ControleDApi.Controllers
         // GET: api/Alimento 18
         [HttpGet]
         [Route("/GetAlimentos")]
+        [Authorize(Roles="Administrador")]
         public IQueryable<Alimento> GetAlimentos()
         {
             return db.Alimento;
@@ -80,6 +81,7 @@ namespace ControleDApi.Controllers
 
         // POST: api/Alimento
         [ResponseType(typeof(Alimento))]
+        [Authorize(Roles = "Administrador")]
         public IHttpActionResult PostAlimento(Alimento alimento)
         {
             try

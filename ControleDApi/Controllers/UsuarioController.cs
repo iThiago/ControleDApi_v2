@@ -17,14 +17,14 @@ using Microsoft.AspNet.Identity.Owin;
 namespace ControleDApi.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    [RoutePrefix("/Usuario")]
+    [RoutePrefix("Usuario")]
     public class UsuarioController : ApiController
     {
         private Context db = new Context();
 
         // GET: api/Usuario
         [HttpGet]
-        [Route("/GetUsuario")]
+        [Route("GetUsuario")]
         public IQueryable<Usuario> GetUsuario()
         {
             return db.Users;
@@ -33,7 +33,7 @@ namespace ControleDApi.Controllers
         // GET: api/Usuario/5
         [ResponseType(typeof(Usuario))]
         [HttpGet]
-        [Route("/GetUsuario")]
+        [Route("GetUsuario")]
         public IHttpActionResult GetUsuario(int id)
         {
             Usuario pessoa = db.Users.Find(id);
@@ -93,6 +93,9 @@ namespace ControleDApi.Controllers
                 usuario.UserName = "tnsthiago";
 
                 var userManager = Request.GetOwinContext().GetUserManager<AppUserManager>();
+
+                usuario.UserName = usuario.Email;
+                usuario.PasswordHash = usuario.Senha;
 
                 IdentityResult result = userManager.Create(usuario, usuario.Senha);
 

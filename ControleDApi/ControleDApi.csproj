@@ -180,9 +180,14 @@
     <Compile Include="Migrations\201803281427579_firstWithIdentity.Designer.cs">
       <DependentUpon>201803281427579_firstWithIdentity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804061628515_alteracaoAlimentoTabelaEnergia.cs" />
+    <Compile Include="Migrations\201804061628515_alteracaoAlimentoTabelaEnergia.Designer.cs">
+      <DependentUpon>201804061628515_alteracaoAlimentoTabelaEnergia.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Agendamento.cs" />
     <Compile Include="Models\AlimentoConsumo.cs" />
+    <Compile Include="Models\Energia.cs" />
     <Compile Include="Models\Insulina.cs" />
     <Compile Include="Models\Perfil.cs" />
     <Compile Include="Models\Usuario.cs" />
@@ -206,6 +211,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201803281427579_firstWithIdentity.resx">
       <DependentUpon>201803281427579_firstWithIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804061628515_alteracaoAlimentoTabelaEnergia.resx">
+      <DependentUpon>201804061628515_alteracaoAlimentoTabelaEnergia.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

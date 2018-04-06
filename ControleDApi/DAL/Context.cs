@@ -49,6 +49,7 @@ namespace ControleDApi.DAL
 
 
         public DbSet<Alimento> Alimento { get; set; }
+        public DbSet<Energia> Energia { get; set; }
         public DbSet<AlimentoConsumo> AlimentoConsumo { get; set; }
         public DbSet<Refeicao> Refeicao { get; set; }
         public DbSet<Insulina> Insulina { get; set; }

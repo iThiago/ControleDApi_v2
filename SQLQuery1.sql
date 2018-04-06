@@ -1,0 +1,1 @@
+﻿drop database BD_ControleD

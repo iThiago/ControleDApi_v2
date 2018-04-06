@@ -16,7 +16,7 @@ namespace ControleDApi.App_Start
         {
             var configuration = new HttpConfiguration();
 
-            ConfigureRotas(configuration);
+            //ConfigureRotas(configuration);
 
             app.CreatePerOwinContext(Context.Create);
             app.CreatePerOwinContext<AppUserManager>(AppUserManager.Create);
@@ -25,13 +25,13 @@ namespace ControleDApi.App_Start
             var oAuthServerOptions = new OAuthAuthorizationServerOptions()
             {
                 AllowInsecureHttp = true,
-                TokenEndpointPath = new PathString("/api/Usuario/Login"),
+                TokenEndpointPath = new PathString("/api/Login"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromHours(1),
                 Provider = new ControleDAuthorizationServerProvider()
             };
             app.UseOAuthAuthorizationServer(oAuthServerOptions);
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
-            app.UseWebApi(configuration);
+            //app.UseWebApi(configuration);
         }
         private static void ConfigureRotas(HttpConfiguration config)
         {

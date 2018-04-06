@@ -33,18 +33,28 @@ namespace ControleDApi.App_Start
 
             ClaimsIdentity identity = await userManager.CreateIdentityAsync(usuario, context.Options.AuthenticationType);
 
-            identity.AddClaim(new Claim(ClaimTypes.Country, "Brasil"));
-            identity.AddClaim(new Claim(ClaimTypes.Role, "Administrador"));
+            //usuario.Claims.ToList().ForEach(x =>
+            //identity.AddClaim(new Claim(x.ClaimType, x.ClaimValue))
+            //);
+            
+            //identity.AddClaim(new Claim(ClaimTypes.Role, "Administrador"));
 
             var tichet = new AuthenticationTicket(identity, GetProperties(usuario,
                 identity.Claims));
-
+            
             context.Validated(tichet);
         }
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)
         {
             foreach (var property in context.Properties.Dictionary)
                 context.AdditionalResponseParameters.Add(property.Key, property.Value);
+
+            var ctx = new Context();
+
+            var user = ctx.Users.Where(x => x.UserName == context.Identity.Name).FirstOrDefault();
+
+            context.AdditionalResponseParameters.Add("NomeUsuario", user.Nome);
+
             return Task.FromResult<object>(null);
         }
         private static AuthenticationProperties GetProperties(Usuario usuario, IEnumerable<Claim> claims)
