@@ -15,35 +15,35 @@ namespace ControleDApi.Models
 
         public int Id { get; set; }
         [Required(ErrorMessage = "Descrição é obrigatório!")]
-        public string descricao { get; set; }
+        public string Descricao { get; set; }
         [Required(ErrorMessage = "Qtd. Carboidrato é obrigatório!")]
        // public decimal QtdCarboidrato { get; set; }
-        public int classificacao { get; set; }
-        public string umidade { get; set; }
-        public Energia energia { get; set; }
-        public string proteina { get; set; }
-        public string lipideos { get; set; }
-        public string colesterol { get; set; }
-        public string carboidrato { get; set; }
-        public string fibra_alimentar { get; set; }
-        public string cinzas { get; set; }
-        public string calcio { get; set; }
-        public string magnesio { get; set; }
-        public string manganes { get; set; }
-        public string fosforo { get; set; }
-        public string ferro { get; set; }
-        public string sodio { get; set; }
-        public string potassio { get; set; }
-        public string cobre { get; set; }
-        public string zinco { get; set; }
-        public string retinol { get; set; }
-        public string re { get; set; }
-        public string rae { get; set; }
-        public string tiamina { get; set; }
-        public string riboflavina { get; set; }
-        public string piridoxina { get; set; }
-        public string niacina { get; set; }
-        public string vitamina_c { get; set; }
+        public int Classificacao { get; set; }
+        public string Umidade { get; set; }
+        public Energia Energia { get; set; }
+        public string Proteina { get; set; }
+        public string Lipideos { get; set; }
+        public string Colesterol { get; set; }
+        public string Carboidrato { get; set; }
+        public string FibraAlimentar { get; set; }
+        public string Cinzas { get; set; }
+        public string Calcio { get; set; }
+        public string Magnesio { get; set; }
+        public string Manganes { get; set; }
+        public string Fosforo { get; set; }
+        public string Ferro { get; set; }
+        public string Sodio { get; set; }
+        public string Potassio { get; set; }
+        public string Cobre { get; set; }
+        public string Zinco { get; set; }
+        public string Retinol { get; set; }
+        public string Re { get; set; }
+        public string Rae { get; set; }
+        public string Tiamina { get; set; }
+        public string Riboflavina { get; set; }
+        public string Piridoxina { get; set; }
+        public string Niacina { get; set; }
+        public string VitaminaC { get; set; }
         public virtual List<AlimentoConsumo> AlimentosConsumo { get; set; }
     }
 }

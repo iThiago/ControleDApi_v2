@@ -184,6 +184,38 @@
     <Compile Include="Migrations\201804061628515_alteracaoAlimentoTabelaEnergia.Designer.cs">
       <DependentUpon>201804061628515_alteracaoAlimentoTabelaEnergia.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804061732061_tirandoUnderlineVitminac.cs" />
+    <Compile Include="Migrations\201804061732061_tirandoUnderlineVitminac.Designer.cs">
+      <DependentUpon>201804061732061_tirandoUnderlineVitminac.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804061734495_tirandoUnderlineFibraAlimentar.cs" />
+    <Compile Include="Migrations\201804061734495_tirandoUnderlineFibraAlimentar.Designer.cs">
+      <DependentUpon>201804061734495_tirandoUnderlineFibraAlimentar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804061741555_seila.cs" />
+    <Compile Include="Migrations\201804061741555_seila.Designer.cs">
+      <DependentUpon>201804061741555_seila.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804061746335_seila2.cs" />
+    <Compile Include="Migrations\201804061746335_seila2.Designer.cs">
+      <DependentUpon>201804061746335_seila2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804061752059_seila3.cs" />
+    <Compile Include="Migrations\201804061752059_seila3.Designer.cs">
+      <DependentUpon>201804061752059_seila3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804061758292_tirandotudo.cs" />
+    <Compile Include="Migrations\201804061758292_tirandotudo.Designer.cs">
+      <DependentUpon>201804061758292_tirandotudo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804061804327_colocandoDeNovo.cs" />
+    <Compile Include="Migrations\201804061804327_colocandoDeNovo.Designer.cs">
+      <DependentUpon>201804061804327_colocandoDeNovo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804061847394_ajustandoNomes.cs" />
+    <Compile Include="Migrations\201804061847394_ajustandoNomes.Designer.cs">
+      <DependentUpon>201804061847394_ajustandoNomes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Agendamento.cs" />
     <Compile Include="Models\AlimentoConsumo.cs" />
@@ -214,6 +246,30 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804061628515_alteracaoAlimentoTabelaEnergia.resx">
       <DependentUpon>201804061628515_alteracaoAlimentoTabelaEnergia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804061732061_tirandoUnderlineVitminac.resx">
+      <DependentUpon>201804061732061_tirandoUnderlineVitminac.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804061734495_tirandoUnderlineFibraAlimentar.resx">
+      <DependentUpon>201804061734495_tirandoUnderlineFibraAlimentar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804061741555_seila.resx">
+      <DependentUpon>201804061741555_seila.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804061746335_seila2.resx">
+      <DependentUpon>201804061746335_seila2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804061752059_seila3.resx">
+      <DependentUpon>201804061752059_seila3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804061758292_tirandotudo.resx">
+      <DependentUpon>201804061758292_tirandotudo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804061804327_colocandoDeNovo.resx">
+      <DependentUpon>201804061804327_colocandoDeNovo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804061847394_ajustandoNomes.resx">
+      <DependentUpon>201804061847394_ajustandoNomes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

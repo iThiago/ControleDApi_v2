@@ -11,6 +11,7 @@ using System.Web.Http.Description;
 using ControleDApi.DAL;
 using ControleDApi.Models;
 using System.Web.Http.Cors;
+using System.Web.Script.Serialization;
 
 namespace ControleDApi.Controllers
 {
@@ -23,9 +24,43 @@ namespace ControleDApi.Controllers
         // GET: api/Alimento 18
         [HttpGet]
         [Route("/GetAlimentos")]
-        [Authorize(Roles="Administrador")]
+        [Authorize(Roles = "Administrador")]
         public IQueryable<Alimento> GetAlimentos()
         {
+
+
+            var caminho = "C:/Users/thiago.nsilva.ABNOTE/Desktop/alimentos.json";
+            string text = System.IO.File.ReadAllText(caminho);
+
+    //        System.IO.StreamReader file =
+    //new System.IO.StreamReader(caminho);
+
+            var line = "";
+            //try
+            //{
+
+            //    //while ((line = file.ReadLine()) != null)
+            //    //{
+            //    //    System.Console.WriteLine(line);
+            //    //    // counter++;
+            //    //}
+
+
+            //    //JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
+            //    //List<Alimento> alimentos = jsonSerializer.Deserialize<List<Alimento>>(text);
+
+
+            //    //db.Alimento.AddRange(alimentos);
+
+            //    //db.SaveChanges();
+
+            //}
+            //catch (Exception e)
+            //{
+
+            //    throw;
+            //}
+            var x = db.Alimento.ToList();
             return db.Alimento;
         }
 
