@@ -24,7 +24,8 @@ namespace ControleDApi.Models
         public int? Crm { get; set; }
         public virtual List<Agendamento> Agendamentos { get; set; }
         public virtual List<Refeicao> Refeicoes { get; set; }
-        public int idPerfil { get; set; }
+        public int IdPerfil { get; set; }
         public Perfil Perfil { get; set; }
+        public bool? senhaTemporaria { get; set; }
     }
 }

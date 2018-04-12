@@ -16,14 +16,15 @@ using System.Web.Script.Serialization;
 namespace ControleDApi.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    [RoutePrefix("Alimento")]
+    [RoutePrefix("api/Alimento")]
     public class AlimentoController : ApiController
     {
         private Context db = new Context();
 
         // GET: api/Alimento 18
         [HttpGet]
-        [Route("/GetAlimentos")]
+        [Route("GetAlimentos")]
+        [Route("")]
         [Authorize(Roles = "Administrador")]
         public IQueryable<Alimento> GetAlimentos()
         {
@@ -67,7 +68,8 @@ namespace ControleDApi.Controllers
         // GET: api/Alimento/5
         [ResponseType(typeof(Alimento))]
         [HttpGet]
-        [Route("/GetAlimento")]
+        [Route("GetAlimento")]
+        [Route("")]
         public IHttpActionResult GetAlimento(int id)
         {
             Alimento alimento = db.Alimento.Find(id);
@@ -81,6 +83,7 @@ namespace ControleDApi.Controllers
 
         // PUT: api/Alimento/5
         [ResponseType(typeof(void))]
+        [Route("")]
         public IHttpActionResult PutAlimento(int id, Alimento alimento)
         {
             if (!ModelState.IsValid)
@@ -117,16 +120,11 @@ namespace ControleDApi.Controllers
         // POST: api/Alimento
         [ResponseType(typeof(Alimento))]
         [Authorize(Roles = "Administrador")]
+        [Route("")]
         public IHttpActionResult PostAlimento(Alimento alimento)
         {
             try
             {
-
-                if (!ModelState.IsValid)
-                {
-                    throw new Exception("Algum campo não foi preenchido corretamente!");
-                }
-
                 db.Alimento.Add(alimento);
                 db.SaveChanges();
 
@@ -140,6 +138,7 @@ namespace ControleDApi.Controllers
 
         // DELETE: api/Alimento/5
         [ResponseType(typeof(Alimento))]
+        [Route("")]
         public IHttpActionResult DeleteAlimento(int id)
         {
             Alimento alimento = db.Alimento.Find(id);

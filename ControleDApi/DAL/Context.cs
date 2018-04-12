@@ -33,6 +33,10 @@ namespace ControleDApi.DAL
                 .Property(p => p.Id)
                 .HasColumnName("UsuarioId");
 
+
+            //modelBuilder.Entity<IdentityUser>().HasKey(p => p.Id);
+            //modelBuilder.Entity<IdentityUser>().Property(p => p.Id).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+
             modelBuilder.Entity<Usuario>()
                 .ToTable("Usuarios")
                 .Property(p => p.Id)
