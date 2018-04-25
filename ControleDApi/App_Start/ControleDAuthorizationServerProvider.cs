@@ -22,27 +22,41 @@ namespace ControleDApi.App_Start
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var userManager = context.OwinContext.GetUserManager<AppUserManager>();
-
-            var usuario = await userManager.FindAsync(context.UserName, context.Password);
-            if (usuario == null)
+            try
             {
-                context.SetError("invalid_grant", "Usuario inválido");
-                return;
+                var userManager = context.OwinContext.GetUserManager<AppUserManager>();
+
+                var usuario = await userManager.FindAsync(context.UserName, context.Password);
+                if (usuario == null)
+                {
+                    context.SetError("invalid_grant", "Usuario inválido");
+                    return;
+                }
+
+                ClaimsIdentity identity = await userManager.CreateIdentityAsync(usuario, context.Options.AuthenticationType);
+
+                //usuario.Claims.ToList().ForEach(x =>
+                //identity.AddClaim(new Claim(x.ClaimType, x.ClaimValue))
+                //);
+                
+                //var roles = await userManager.GetRolesAsync(usuario.Id);
+
+                //foreach (var role in roles)
+                //{
+                //    identity.AddClaim(new Claim(ClaimTypes.Role, role));
+                //}
+
+                //
+
+                var tichet = new AuthenticationTicket(identity, GetProperties(usuario,
+                    identity.Claims));
+
+                context.Validated(tichet);
             }
-
-            ClaimsIdentity identity = await userManager.CreateIdentityAsync(usuario, context.Options.AuthenticationType);
-
-            //usuario.Claims.ToList().ForEach(x =>
-            //identity.AddClaim(new Claim(x.ClaimType, x.ClaimValue))
-            //);
-            
-            //identity.AddClaim(new Claim(ClaimTypes.Role, "Administrador"));
-
-            var tichet = new AuthenticationTicket(identity, GetProperties(usuario,
-                identity.Claims));
-            
-            context.Validated(tichet);
+            catch (Exception e)
+            {
+                throw e ;
+            }
         }
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)
         {

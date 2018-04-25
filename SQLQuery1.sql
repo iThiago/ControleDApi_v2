@@ -1,1 +1,1 @@
-﻿drop database BD_ControleD
+﻿delete from pessoa

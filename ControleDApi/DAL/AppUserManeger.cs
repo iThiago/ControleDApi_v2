@@ -10,9 +10,9 @@ using System.Web;
 
 namespace ControleDApi.DAL
 {
-    public class AppUserManager : UserManager<Usuario>
+    public class AppUserManager : UserManager<Usuario, int>
     {
-        public AppUserManager(IUserStore<Usuario> store)
+        public AppUserManager(IUserStore<Usuario,int> store)
             : base(store)
         { }
 
@@ -20,9 +20,10 @@ namespace ControleDApi.DAL
         {
             var contexto = context.Get<Context>();
 
-            var store = new UserStore<Usuario>(contexto);
+            var store = new CustomUserStore(contexto);
 
-            var userManager = new AppUserManager(store);
+            var userManager = new AppUserManager(
+            new CustomUserStore(context.Get<Context>()));
 
             return userManager;
         }

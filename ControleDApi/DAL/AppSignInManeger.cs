@@ -9,7 +9,7 @@ using System.Web;
 
 namespace ControleDApi.DAL
 {
-    public class AppSignInManager : SignInManager<Usuario, string>
+    public class AppSignInManager : SignInManager<Usuario, int>
     {
         public AppSignInManager(AppUserManager userManager, IAuthenticationManager authenticationManager)
             : base(userManager, authenticationManager)

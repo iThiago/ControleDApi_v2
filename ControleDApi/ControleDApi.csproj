@@ -164,6 +164,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\ClaimsAuthorizeAttribute.cs" />
     <Compile Include="App_Start\ControleDAuthorizationServerProvider.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
@@ -174,63 +175,45 @@
     <Compile Include="DAL\AppSignInManeger.cs" />
     <Compile Include="DAL\AppUserManeger.cs" />
     <Compile Include="DAL\Context.cs" />
+    <Compile Include="DAL\CustomUserStore.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803281427579_firstWithIdentity.cs" />
-    <Compile Include="Migrations\201803281427579_firstWithIdentity.Designer.cs">
-      <DependentUpon>201803281427579_firstWithIdentity.cs</DependentUpon>
+    <Compile Include="Migrations\201804131153593_idIdentity.cs" />
+    <Compile Include="Migrations\201804131153593_idIdentity.Designer.cs">
+      <DependentUpon>201804131153593_idIdentity.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804061628515_alteracaoAlimentoTabelaEnergia.cs" />
-    <Compile Include="Migrations\201804061628515_alteracaoAlimentoTabelaEnergia.Designer.cs">
-      <DependentUpon>201804061628515_alteracaoAlimentoTabelaEnergia.cs</DependentUpon>
+    <Compile Include="Migrations\201804131300356_retirandoPerfilUsarRoles.cs" />
+    <Compile Include="Migrations\201804131300356_retirandoPerfilUsarRoles.Designer.cs">
+      <DependentUpon>201804131300356_retirandoPerfilUsarRoles.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804061732061_tirandoUnderlineVitminac.cs" />
-    <Compile Include="Migrations\201804061732061_tirandoUnderlineVitminac.Designer.cs">
-      <DependentUpon>201804061732061_tirandoUnderlineVitminac.cs</DependentUpon>
+    <Compile Include="Migrations\201804191655338_relacionamentoPacienteMedico.cs" />
+    <Compile Include="Migrations\201804191655338_relacionamentoPacienteMedico.Designer.cs">
+      <DependentUpon>201804191655338_relacionamentoPacienteMedico.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804061734495_tirandoUnderlineFibraAlimentar.cs" />
-    <Compile Include="Migrations\201804061734495_tirandoUnderlineFibraAlimentar.Designer.cs">
-      <DependentUpon>201804061734495_tirandoUnderlineFibraAlimentar.cs</DependentUpon>
+    <Compile Include="Migrations\201804191846299_tese.cs" />
+    <Compile Include="Migrations\201804191846299_tese.Designer.cs">
+      <DependentUpon>201804191846299_tese.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804061741555_seila.cs" />
-    <Compile Include="Migrations\201804061741555_seila.Designer.cs">
-      <DependentUpon>201804061741555_seila.cs</DependentUpon>
+    <Compile Include="Migrations\201804191907101_teste.cs" />
+    <Compile Include="Migrations\201804191907101_teste.Designer.cs">
+      <DependentUpon>201804191907101_teste.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804061746335_seila2.cs" />
-    <Compile Include="Migrations\201804061746335_seila2.Designer.cs">
-      <DependentUpon>201804061746335_seila2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804061752059_seila3.cs" />
-    <Compile Include="Migrations\201804061752059_seila3.Designer.cs">
-      <DependentUpon>201804061752059_seila3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804061758292_tirandotudo.cs" />
-    <Compile Include="Migrations\201804061758292_tirandotudo.Designer.cs">
-      <DependentUpon>201804061758292_tirandotudo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804061804327_colocandoDeNovo.cs" />
-    <Compile Include="Migrations\201804061804327_colocandoDeNovo.Designer.cs">
-      <DependentUpon>201804061804327_colocandoDeNovo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804061847394_ajustandoNomes.cs" />
-    <Compile Include="Migrations\201804061847394_ajustandoNomes.Designer.cs">
-      <DependentUpon>201804061847394_ajustandoNomes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804101827180_senhaTemporariaField.cs" />
-    <Compile Include="Migrations\201804101827180_senhaTemporariaField.Designer.cs">
-      <DependentUpon>201804101827180_senhaTemporariaField.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804121131351_idIdentity.cs" />
-    <Compile Include="Migrations\201804121131351_idIdentity.Designer.cs">
-      <DependentUpon>201804121131351_idIdentity.cs</DependentUpon>
+    <Compile Include="Migrations\201804192003344_teste1.cs" />
+    <Compile Include="Migrations\201804192003344_teste1.Designer.cs">
+      <DependentUpon>201804192003344_teste1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Agendamento.cs" />
     <Compile Include="Models\AlimentoConsumo.cs" />
+    <Compile Include="Models\Auth\CustomRole.cs" />
+    <Compile Include="Models\Auth\CustomRoleStore.cs" />
+    <Compile Include="Models\Auth\CustomUserClaim.cs" />
+    <Compile Include="Models\Auth\CustomUserLogin.cs" />
+    <Compile Include="Models\Auth\CustomUserRole.cs" />
     <Compile Include="Models\Energia.cs" />
     <Compile Include="Models\Insulina.cs" />
-    <Compile Include="Models\Perfil.cs" />
+    <Compile Include="Models\Mapping\UsuarioUsuariosMap.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\Alimento.cs" />
     <Compile Include="Models\Refeicao.cs" />
@@ -251,41 +234,23 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803281427579_firstWithIdentity.resx">
-      <DependentUpon>201803281427579_firstWithIdentity.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804131153593_idIdentity.resx">
+      <DependentUpon>201804131153593_idIdentity.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804061628515_alteracaoAlimentoTabelaEnergia.resx">
-      <DependentUpon>201804061628515_alteracaoAlimentoTabelaEnergia.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804131300356_retirandoPerfilUsarRoles.resx">
+      <DependentUpon>201804131300356_retirandoPerfilUsarRoles.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804061732061_tirandoUnderlineVitminac.resx">
-      <DependentUpon>201804061732061_tirandoUnderlineVitminac.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804191655338_relacionamentoPacienteMedico.resx">
+      <DependentUpon>201804191655338_relacionamentoPacienteMedico.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804061734495_tirandoUnderlineFibraAlimentar.resx">
-      <DependentUpon>201804061734495_tirandoUnderlineFibraAlimentar.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804191846299_tese.resx">
+      <DependentUpon>201804191846299_tese.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804061741555_seila.resx">
-      <DependentUpon>201804061741555_seila.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804191907101_teste.resx">
+      <DependentUpon>201804191907101_teste.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804061746335_seila2.resx">
-      <DependentUpon>201804061746335_seila2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804061752059_seila3.resx">
-      <DependentUpon>201804061752059_seila3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804061758292_tirandotudo.resx">
-      <DependentUpon>201804061758292_tirandotudo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804061804327_colocandoDeNovo.resx">
-      <DependentUpon>201804061804327_colocandoDeNovo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804061847394_ajustandoNomes.resx">
-      <DependentUpon>201804061847394_ajustandoNomes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804101827180_senhaTemporariaField.resx">
-      <DependentUpon>201804101827180_senhaTemporariaField.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804121131351_idIdentity.resx">
-      <DependentUpon>201804121131351_idIdentity.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804192003344_teste1.resx">
+      <DependentUpon>201804192003344_teste1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

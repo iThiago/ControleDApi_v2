@@ -12,9 +12,11 @@ using ControleDApi.DAL;
 using ControleDApi.Models;
 using System.Web.Http.Cors;
 using System.Web.Script.Serialization;
+using ControleDApi.App_Start;
 
 namespace ControleDApi.Controllers
 {
+
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     [RoutePrefix("api/Alimento")]
     public class AlimentoController : ApiController
@@ -23,9 +25,9 @@ namespace ControleDApi.Controllers
 
         // GET: api/Alimento 18
         [HttpGet]
+        [Authorize(Roles = "Medico")]
         [Route("GetAlimentos")]
         [Route("")]
-        [Authorize(Roles = "Administrador")]
         public IQueryable<Alimento> GetAlimentos()
         {
 
@@ -68,6 +70,9 @@ namespace ControleDApi.Controllers
         // GET: api/Alimento/5
         [ResponseType(typeof(Alimento))]
         [HttpGet]
+        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Medico")]
+        [Authorize(Roles = "Paciente")]
         [Route("GetAlimento")]
         [Route("")]
         public IHttpActionResult GetAlimento(int id)
@@ -83,6 +88,8 @@ namespace ControleDApi.Controllers
 
         // PUT: api/Alimento/5
         [ResponseType(typeof(void))]
+        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Medico")]
         [Route("")]
         public IHttpActionResult PutAlimento(int id, Alimento alimento)
         {
@@ -120,6 +127,7 @@ namespace ControleDApi.Controllers
         // POST: api/Alimento
         [ResponseType(typeof(Alimento))]
         [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Medico")]
         [Route("")]
         public IHttpActionResult PostAlimento(Alimento alimento)
         {
@@ -138,6 +146,7 @@ namespace ControleDApi.Controllers
 
         // DELETE: api/Alimento/5
         [ResponseType(typeof(Alimento))]
+        [Authorize(Roles = "Administrador")]
         [Route("")]
         public IHttpActionResult DeleteAlimento(int id)
         {

@@ -1,4 +1,5 @@
 ﻿using ControleDApi.DAL;
+using ControleDApi.Models.Auth;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace ControleDApi.Controllers
         [HttpGet]
         [Route("GetRoles")]
         [Route("")]
-        public List<IdentityRole> GetRoles()
+        public List<CustomRole> GetRoles()
         {
 
             var roles = db.Roles.Where(x => !x.Name.ToUpper().Contains("ADMINISTRADOR")).ToList();
