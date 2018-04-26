@@ -219,6 +219,7 @@
     <Compile Include="Models\Refeicao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\EnumRole.cs" />
+    <Compile Include="ViewModel\CadastroNovaSenhaData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

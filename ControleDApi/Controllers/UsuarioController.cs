@@ -17,6 +17,7 @@ using ControleDApi.Util;
 using System.Net.Mail;
 using Microsoft.AspNet.Identity.EntityFramework;
 using ControleDApi.Models.Auth;
+using ControleDApi.ViewModel;
 
 namespace ControleDApi.Controllers
 {
@@ -54,11 +55,14 @@ namespace ControleDApi.Controllers
 
         [HttpGet]
         [Route("GetUsuariosByUserLogado")]
+        [Authorize(Roles = "Administrador,Medico")]
         public List<Usuario> GetUsuariosByUserLogado()
         {
             var id = User.Identity.GetUserId<int>();
-
-            return db.Users.Include(x => x.Usuarios).Where(x => x.Id == id).AsNoTracking().ToList().SelectMany(x => x.Usuarios.Select(c => c)).ToList();
+            var lista = db.Users.Include(x => x.Usuarios).Where(x => x.Usuarios.Select(u => u.Id).Contains(id)).AsNoTracking().ToList();
+            //lista = lista.ToList().SelectMany(x => x.Usuarios.Select(c => c)).ToList();
+            //lista = db.Users.Include(x => x.Usuarios).ToList();
+            return lista;
         }
 
         // GET: api/Usuario/5
@@ -79,7 +83,9 @@ namespace ControleDApi.Controllers
 
         // PUT: api/Usuario/5
         [ResponseType(typeof(void))]
-        [Authorize(Roles = "Administrador")]
+        [Route("")]
+        [Route("PutPessoa")]
+        [Authorize(Roles = "Administrador,Medico")]
         public IHttpActionResult PutPessoa(int id, Usuario pessoa)
         {
             if (!ModelState.IsValid)
@@ -111,6 +117,106 @@ namespace ControleDApi.Controllers
             }
 
             return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        [ResponseType(typeof(void))]
+        [Route("DesassociarPaciente")]
+        [Authorize(Roles = "Administrador,Medico")]
+        [HttpPut]
+        public IHttpActionResult DesassociarPaciente(int id, Usuario pessoa)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != pessoa.Id)
+            {
+                return BadRequest();
+            }
+
+            pessoa = db.Users.Include(x => x.Usuarios).Where(x => x.Id == pessoa.Id).FirstOrDefault();
+
+            var idMedico = User.Identity.GetUserId<int>();
+
+            var medico = pessoa.Usuarios.Where(x => x.Id == idMedico).FirstOrDefault();
+
+            if(medico == null)
+                throw new Exception("Esse paciente não está associado a você.");
+
+            pessoa.Usuarios.Remove(medico);
+
+            db.Entry(pessoa).State = EntityState.Modified;
+
+            try
+            {
+               bool sucesso =  db.SaveChanges() > 0;
+                if (sucesso)
+                {
+                    return StatusCode(HttpStatusCode.OK);
+                }
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!PessoaExists(id.ToString()))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+
+        [ResponseType(typeof(void))]
+        [HttpPut]
+        [Route("CadastrarNovaSenha")]
+        public HttpResponseMessage CadastrarNovaSenha(CadastroNovaSenhaData novaSenhaData)
+        {
+            try
+            {
+
+                var pessoa = db.Users.Where(x => x.Email == novaSenhaData.Email).FirstOrDefault();
+
+                if (pessoa == null)
+                    throw new Exception("Email não encontrado!");
+
+                if (!(bool)pessoa.senhaTemporaria)
+                    throw new Exception("A senha nova já foi cadastrada anteriormente!");
+
+                if (pessoa.Senha != novaSenhaData.SenhaAnterior)
+                    throw new Exception("Senha inválida! Favor colocar a senha temporária que foi enviada por e-mail!");
+
+
+                pessoa.senhaTemporaria = false;
+
+                db.Entry(pessoa).State = EntityState.Modified;
+
+                bool sucesso = db.SaveChanges() > 0;
+
+                if (sucesso)
+                {
+                    var userManager = Request.GetOwinContext().GetUserManager<AppUserManager>();
+
+                    var alterou = userManager.ChangePassword(pessoa.Id, novaSenhaData.SenhaAnterior, novaSenhaData.NovaSenha);
+
+                    if (alterou.Succeeded)
+                        return Request.CreateResponse(HttpStatusCode.OK, "Nova senha cadastrada com sucesso!");
+                    else
+                        return Request.CreateResponse(HttpStatusCode.OK, string.Join("; ",alterou.Errors));
+                }
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, e);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.InternalServerError, "Erro ao cadastrar nova senha!");
+
         }
 
         // POST: api/Usuario
@@ -150,7 +256,7 @@ namespace ControleDApi.Controllers
 
                 usuario.UserName = usuario.Email;
                 usuario.PasswordHash = usuario.Senha;
-                                
+
                 IdentityResult result = userManager.Create(usuario, usuario.Senha);
 
                 if (result.Succeeded)
@@ -166,7 +272,7 @@ namespace ControleDApi.Controllers
                 response = Request.CreateResponse(HttpStatusCode.OK, resultado);
                 return response;
 
-                         }
+            }
             catch (Exception e)
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, e);
@@ -190,7 +296,7 @@ namespace ControleDApi.Controllers
                 usuario.UserName = usuario.Email;
 
                 var userManager = Request.GetOwinContext().GetUserManager<AppUserManager>();
-                
+
                 usuario.UserName = usuario.Email;
 
                 usuario.Senha = Guid.NewGuid().ToString().Substring(0, 6).Replace("-", "1");
@@ -225,10 +331,10 @@ namespace ControleDApi.Controllers
 
                 response = Request.CreateResponse(HttpStatusCode.OK, resultado);
 
-               //var teste =  db.Users.Include(x => x.Usuarios).Where(x => x.Id == usuario.Id);
+                //var teste =  db.Users.Include(x => x.Usuarios).Where(x => x.Id == usuario.Id);
 
                 return response;
-                
+
             }
             catch (Exception e)
             {
