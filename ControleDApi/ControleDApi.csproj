@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -68,9 +69,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Owin, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.3.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.Owin, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Cors, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Cors.4.0.1\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
@@ -191,18 +194,6 @@
     <Compile Include="Migrations\201804191655338_relacionamentoPacienteMedico.Designer.cs">
       <DependentUpon>201804191655338_relacionamentoPacienteMedico.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804191846299_tese.cs" />
-    <Compile Include="Migrations\201804191846299_tese.Designer.cs">
-      <DependentUpon>201804191846299_tese.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804191907101_teste.cs" />
-    <Compile Include="Migrations\201804191907101_teste.Designer.cs">
-      <DependentUpon>201804191907101_teste.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804192003344_teste1.cs" />
-    <Compile Include="Migrations\201804192003344_teste1.Designer.cs">
-      <DependentUpon>201804192003344_teste1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Agendamento.cs" />
     <Compile Include="Models\AlimentoConsumo.cs" />
@@ -243,15 +234,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804191655338_relacionamentoPacienteMedico.resx">
       <DependentUpon>201804191655338_relacionamentoPacienteMedico.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804191846299_tese.resx">
-      <DependentUpon>201804191846299_tese.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804191907101_teste.resx">
-      <DependentUpon>201804191907101_teste.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804192003344_teste1.resx">
-      <DependentUpon>201804192003344_teste1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

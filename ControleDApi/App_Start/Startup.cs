@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using Microsoft.Owin;
+using Microsoft.Owin.Cors;
 
 namespace ControleDApi.App_Start
 {
@@ -15,9 +17,10 @@ namespace ControleDApi.App_Start
         public void Configuration(IAppBuilder app)
         {
             var configuration = new HttpConfiguration();
-
+            
             //ConfigureRotas(configuration);
-
+            //configuration.EnableCors();
+            
             app.CreatePerOwinContext(Context.Create);
             app.CreatePerOwinContext<AppUserManager>(AppUserManager.Create);
 
@@ -27,11 +30,12 @@ namespace ControleDApi.App_Start
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/api/Login"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromHours(1),
-                Provider = new ControleDAuthorizationServerProvider()
+                Provider = new ControleDAuthorizationServerProvider(),
             };
             app.UseOAuthAuthorizationServer(oAuthServerOptions);
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
-            //app.UseWebApi(configuration);
+            app.UseCors(CorsOptions.AllowAll);
+            app.UseWebApi(configuration);
         }
         private static void ConfigureRotas(HttpConfiguration config)
         {

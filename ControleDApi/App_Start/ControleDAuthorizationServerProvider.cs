@@ -24,6 +24,8 @@ namespace ControleDApi.App_Start
         {
             try
             {
+
+                context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
                 var userManager = context.OwinContext.GetUserManager<AppUserManager>();
 
                 var usuario = await userManager.FindAsync(context.UserName, context.Password);
@@ -35,18 +37,18 @@ namespace ControleDApi.App_Start
 
                 ClaimsIdentity identity = await userManager.CreateIdentityAsync(usuario, context.Options.AuthenticationType);
 
-                //usuario.Claims.ToList().ForEach(x =>
-                //identity.AddClaim(new Claim(x.ClaimType, x.ClaimValue))
-                //);
-                
-                //var roles = await userManager.GetRolesAsync(usuario.Id);
+                usuario.Claims.ToList().ForEach(x =>
+                identity.AddClaim(new Claim(x.ClaimType, x.ClaimValue))
+                );
 
-                //foreach (var role in roles)
-                //{
-                //    identity.AddClaim(new Claim(ClaimTypes.Role, role));
-                //}
+                var roles = await userManager.GetRolesAsync(usuario.Id);
 
-                //
+                foreach (var role in roles)
+                {
+                    identity.AddClaim(new Claim(ClaimTypes.Role, role));
+                }
+
+
 
                 var tichet = new AuthenticationTicket(identity, GetProperties(usuario,
                     identity.Claims));

@@ -11,7 +11,7 @@ using System.Web.Http.Cors;
 
 namespace ControleDApi.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    //[EnableCors(origins: "*", headers: "*", methods: "*")]
     [RoutePrefix("api/Role")]
     public class RoleController : ApiController
     {

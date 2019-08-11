@@ -1,19 +1,15 @@
 namespace ControleDApi.Migrations
 {
-    using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.EntityFramework;
-    using Models.Auth;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
-    using System.Web.Security;
 
     internal sealed class Configuration : DbMigrationsConfiguration<ControleDApi.DAL.Context>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(ControleDApi.DAL.Context context)
@@ -30,12 +26,6 @@ namespace ControleDApi.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-
-
-            //context.Roles.AddOrUpdate(x => x.Name, new CustomRole { Name = " Administrador" },
-            //    new CustomRole { Name = "Medico" },
-            //    new CustomRole { Name = "Paciente" });
-
         }
     }
 }

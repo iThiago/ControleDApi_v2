@@ -17,7 +17,7 @@ using ControleDApi.App_Start;
 namespace ControleDApi.Controllers
 {
 
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    //[EnableCors(origins: "*", headers: "*", methods: "*")]
     [RoutePrefix("api/Alimento")]
     public class AlimentoController : ApiController
     {
@@ -32,8 +32,8 @@ namespace ControleDApi.Controllers
         {
 
 
-            var caminho = "C:/Users/thiago.nsilva.ABNOTE/Desktop/alimentos.json";
-            string text = System.IO.File.ReadAllText(caminho);
+            //var caminho = "C:/Users/thiago.nsilva.ABNOTE/Desktop/alimentos.json";
+            //string text = System.IO.File.ReadAllText(caminho);
 
     //        System.IO.StreamReader file =
     //new System.IO.StreamReader(caminho);
@@ -70,9 +70,7 @@ namespace ControleDApi.Controllers
         // GET: api/Alimento/5
         [ResponseType(typeof(Alimento))]
         [HttpGet]
-        [Authorize(Roles = "Administrador")]
-        [Authorize(Roles = "Medico")]
-        [Authorize(Roles = "Paciente")]
+        [Authorize(Roles = "Administrador,Medico,Paciente")]
         [Route("GetAlimento")]
         [Route("")]
         public IHttpActionResult GetAlimento(int id)
@@ -88,8 +86,7 @@ namespace ControleDApi.Controllers
 
         // PUT: api/Alimento/5
         [ResponseType(typeof(void))]
-        [Authorize(Roles = "Administrador")]
-        [Authorize(Roles = "Medico")]
+        [Authorize(Roles = "Administrador,Medico")]
         [Route("")]
         public IHttpActionResult PutAlimento(int id, Alimento alimento)
         {
@@ -126,8 +123,7 @@ namespace ControleDApi.Controllers
 
         // POST: api/Alimento
         [ResponseType(typeof(Alimento))]
-        [Authorize(Roles = "Administrador")]
-        [Authorize(Roles = "Medico")]
+        [Authorize(Roles = "Administrador,Medico")]
         [Route("")]
         public IHttpActionResult PostAlimento(Alimento alimento)
         {

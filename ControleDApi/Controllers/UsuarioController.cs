@@ -21,7 +21,7 @@ using ControleDApi.ViewModel;
 
 namespace ControleDApi.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    //[EnableCors(origins: "*", headers: "*", methods: "*")]
     [RoutePrefix("api/Usuario")]
     public class UsuarioController : ApiController
     {

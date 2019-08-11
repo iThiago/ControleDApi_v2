@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace ControleDApi
 {
@@ -16,6 +17,8 @@ namespace ControleDApi
             // Web API routes
             config.MapHttpAttributeRoutes();
 
+            //var corsAttr = new EnableCorsAttribute("*", "*", "*");
+            //config.EnableCors(corsAttr);
             config.EnableCors();
 
             config.Formatters.Clear();
