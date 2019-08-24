@@ -5,6 +5,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -62,14 +63,20 @@ namespace ControleDApi.App_Start
         }
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)
         {
-            foreach (var property in context.Properties.Dictionary)
-                context.AdditionalResponseParameters.Add(property.Key, property.Value);
+            //foreach (var property in context.Properties.Dictionary)
+            //    context.AdditionalResponseParameters.Add(property.Key, property.Value);
 
             var ctx = new Context();
 
-            var user = ctx.Users.Where(x => x.UserName == context.Identity.Name).FirstOrDefault();
+            var user = ctx.Users.Include(x => x.Roles).FirstOrDefault(x => x.UserName == context.Identity.Name);
 
             context.AdditionalResponseParameters.Add("NomeUsuario", user.Nome);
+            var strRoles = string.Join(",", user.Roles.Select(x => x.RoleId.ToString()));
+
+            context.Properties.Dictionary.Add("Roles", strRoles);
+
+            foreach (var property in context.Properties.Dictionary)
+                context.AdditionalResponseParameters.Add(property.Key, property.Value);
 
             return Task.FromResult<object>(null);
         }
