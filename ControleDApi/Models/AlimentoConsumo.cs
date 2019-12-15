@@ -6,6 +6,8 @@
         public decimal QtdAlimento { get; set; }
         public decimal QtdCarboidrato { get; set; }
         public decimal QtdInsulina { get; set; }
+        public int AlimentoId { get; set; }
+        public int RefeicaoId { get; set; }
         public virtual Alimento Alimento { get; set; }
         public virtual Refeicao Refeicao { get; set; }
     }

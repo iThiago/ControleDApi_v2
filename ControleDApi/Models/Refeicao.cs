@@ -14,7 +14,9 @@ namespace ControleDApi.Models
         public int Id { get; set; }
         public decimal QtdCarboidrato { get; set; }
         public decimal QtdInsulina { get; set; }
+        public int InsulinaId { get; set; }
         public virtual Insulina Insulina { get; set; }
+        public int PessoaId { get; set; }
         public virtual Usuario Pessoa { get; set; }
         public virtual List<AlimentoConsumo> AlimentosConsumo { get; set; }
         

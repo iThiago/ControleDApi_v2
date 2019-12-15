@@ -173,6 +173,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AlimentoController.cs" />
+    <Compile Include="Controllers\RefeicaoController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DAL\AppSignInManeger.cs" />
@@ -193,6 +194,10 @@
     <Compile Include="Migrations\201804191655338_relacionamentoPacienteMedico.cs" />
     <Compile Include="Migrations\201804191655338_relacionamentoPacienteMedico.Designer.cs">
       <DependentUpon>201804191655338_relacionamentoPacienteMedico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912151336488_colunas_refeicao.cs" />
+    <Compile Include="Migrations\201912151336488_colunas_refeicao.Designer.cs">
+      <DependentUpon>201912151336488_colunas_refeicao.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Agendamento.cs" />
@@ -234,6 +239,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804191655338_relacionamentoPacienteMedico.resx">
       <DependentUpon>201804191655338_relacionamentoPacienteMedico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912151336488_colunas_refeicao.resx">
+      <DependentUpon>201912151336488_colunas_refeicao.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
