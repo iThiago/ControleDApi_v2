@@ -18,7 +18,7 @@ namespace ControleDApi.DAL
             : base("BD_ControleD")
         {
           //  Database.SetInitializer<Context>(null);
-            Configuration.LazyLoadingEnabled = true;
+            Configuration.LazyLoadingEnabled = false;
             Configuration.ProxyCreationEnabled = false;
         }
         public static Context Create()

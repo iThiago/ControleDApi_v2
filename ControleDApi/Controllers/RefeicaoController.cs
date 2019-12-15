@@ -19,14 +19,16 @@ namespace ControleDApi.Controllers
     {
         private Context db = new Context();
 
+        [Route("")]
         // GET: api/Refeicao
-        public IQueryable<Refeicao> GetRefeicao()
+        public List<Refeicao> GetRefeicao()
         {
-            return db.Refeicao;
+            return db.Refeicao.Include(x => x.AlimentosConsumo.Select(y => y.Alimento)).Include(x => x.Pessoa).AsNoTracking().ToList();
         }
 
         // GET: api/Refeicao/5
         [ResponseType(typeof(Refeicao))]
+        [Route("")]
         public async Task<IHttpActionResult> GetRefeicao(int id)
         {
             Refeicao refeicao = await db.Refeicao.FindAsync(id);
@@ -40,6 +42,7 @@ namespace ControleDApi.Controllers
 
         // PUT: api/Refeicao/5
         [ResponseType(typeof(void))]
+        [Route("")]
         public async Task<IHttpActionResult> PutRefeicao(int id, Refeicao refeicao)
         {
             if (!ModelState.IsValid)
@@ -99,6 +102,7 @@ namespace ControleDApi.Controllers
 
         // DELETE: api/Refeicao/5
         [ResponseType(typeof(Refeicao))]
+        [Route("")]
         public async Task<IHttpActionResult> DeleteRefeicao(int id)
         {
             Refeicao refeicao = await db.Refeicao.FindAsync(id);
