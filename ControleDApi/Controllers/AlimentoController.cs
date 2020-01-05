@@ -26,7 +26,7 @@ namespace ControleDApi.Controllers
         // GET: api/Alimento 18
         [HttpGet]
         //[Authorize(Roles = "Medico")]
-        [Route("GetAlimentos")]
+        //[Route("GetAlimentos")]
         [Route("")]
         public IQueryable<Alimento> GetAlimentos()
         {
@@ -71,7 +71,7 @@ namespace ControleDApi.Controllers
         [ResponseType(typeof(Alimento))]
         [HttpGet]
         [Authorize(Roles = "Administrador,Medico,Paciente")]
-        [Route("GetAlimentoById")]
+        [Route("{id}")]
         public IHttpActionResult GetAlimento(int id)
         {
             Alimento alimento = db.Alimento.Find(id);

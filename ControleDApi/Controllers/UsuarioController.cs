@@ -29,7 +29,6 @@ namespace ControleDApi.Controllers
 
         // GET: api/Usuario
         [HttpGet]
-        [Route("Get")]
         [Route("")]
         public IQueryable<Usuario> GetUsuario()
         {
@@ -68,7 +67,7 @@ namespace ControleDApi.Controllers
         // GET: api/Usuario/5
         [ResponseType(typeof(Usuario))]
         [HttpGet]
-        [Route("GetUsuario")]
+        [Route("{id}")]
         public IHttpActionResult GetUsuario(int id)
         {
             Usuario pessoa = db.Users.Find(id);
