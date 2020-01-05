@@ -19,31 +19,32 @@ namespace ControleDApi.Models
         [Required(ErrorMessage = "Qtd. Carboidrato é obrigatório!")]
        // public decimal QtdCarboidrato { get; set; }
         public int Classificacao { get; set; }
+        public string Categoria { get; set; }
         public string Umidade { get; set; }
         public Energia Energia { get; set; }
         public string Proteina { get; set; }
         public string Lipideos { get; set; }
-        public string Colesterol { get; set; }
+        public string ColesterolMGrama { get; set; }
         public string Carboidrato { get; set; }
         public string FibraAlimentar { get; set; }
-        public string Cinzas { get; set; }
-        public string Calcio { get; set; }
-        public string Magnesio { get; set; }
-        public string Manganes { get; set; }
-        public string Fosforo { get; set; }
-        public string Ferro { get; set; }
-        public string Sodio { get; set; }
-        public string Potassio { get; set; }
-        public string Cobre { get; set; }
-        public string Zinco { get; set; }
-        public string Retinol { get; set; }
-        public string Re { get; set; }
-        public string Rae { get; set; }
-        public string Tiamina { get; set; }
-        public string Riboflavina { get; set; }
-        public string Piridoxina { get; set; }
-        public string Niacina { get; set; }
-        public string VitaminaC { get; set; }
+        public string CinzasMGrama { get; set; }
+        public string CalcioMGrama { get; set; }
+        public string MagnezioMGrama { get; set; }
+        public string ManganesMGrama { get; set; }
+        public string FosforoMGrama { get; set; }
+        public string FerroMGrama { get; set; }
+        public string SodioMGrama { get; set; }
+        public string PotassioMGrama { get; set; }
+        public string CobreMGrama { get; set; }
+        public string ZincoMGrama { get; set; }
+        public string RetinolMGrama { get; set; }
+        public string ReMgc { get; set; }
+        public string RaeMgc { get; set; }
+        public string TiaminaMGrama { get; set; }
+        public string RiboflavinaMGrama { get; set; }
+        public string PiridoxinaMGrama { get; set; }
+        public string NiacinaMGrama { get; set; }
+        public string VitaminaCMGrama { get; set; }
         public virtual List<AlimentoConsumo> AlimentosConsumo { get; set; }
     }
 }

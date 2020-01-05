@@ -25,7 +25,7 @@ namespace ControleDApi.Controllers
 
         // GET: api/Alimento 18
         [HttpGet]
-        [Authorize(Roles = "Medico")]
+        //[Authorize(Roles = "Medico")]
         [Route("GetAlimentos")]
         [Route("")]
         public IQueryable<Alimento> GetAlimentos()
