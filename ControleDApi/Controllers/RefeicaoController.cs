@@ -23,7 +23,7 @@ namespace ControleDApi.Controllers
         // GET: api/Refeicao
         public List<Refeicao> GetRefeicao()
         {
-            return db.Refeicao.Include(x => x.AlimentosConsumo.Select(y => y.Alimento)).Include(x => x.Pessoa).AsNoTracking().ToList();
+            return db.Refeicao.Include(x => x.AlimentosConsumo.Select(y => y.Alimento)).Include(x => x.Usuarios).AsNoTracking().ToList();
         }
 
         // GET: api/Refeicao/5

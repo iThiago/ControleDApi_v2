@@ -199,9 +199,13 @@
     <Compile Include="Migrations\201912151336488_colunas_refeicao.Designer.cs">
       <DependentUpon>201912151336488_colunas_refeicao.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202001050235052_renameCounmsFoodAddCategory.cs" />
-    <Compile Include="Migrations\202001050235052_renameCounmsFoodAddCategory.Designer.cs">
-      <DependentUpon>202001050235052_renameCounmsFoodAddCategory.cs</DependentUpon>
+    <Compile Include="Migrations\202001051445459_usuariosrefeicoes.cs" />
+    <Compile Include="Migrations\202001051445459_usuariosrefeicoes.Designer.cs">
+      <DependentUpon>202001051445459_usuariosrefeicoes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001051619361_colnmIsTemplateRefeicao.cs" />
+    <Compile Include="Migrations\202001051619361_colnmIsTemplateRefeicao.Designer.cs">
+      <DependentUpon>202001051619361_colnmIsTemplateRefeicao.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Agendamento.cs" />
@@ -253,8 +257,11 @@
     <EmbeddedResource Include="Migrations\201912151336488_colunas_refeicao.resx">
       <DependentUpon>201912151336488_colunas_refeicao.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001050235052_renameCounmsFoodAddCategory.resx">
-      <DependentUpon>202001050235052_renameCounmsFoodAddCategory.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001051445459_usuariosrefeicoes.resx">
+      <DependentUpon>202001051445459_usuariosrefeicoes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001051619361_colnmIsTemplateRefeicao.resx">
+      <DependentUpon>202001051619361_colnmIsTemplateRefeicao.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
