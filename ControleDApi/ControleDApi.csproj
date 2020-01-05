@@ -230,9 +230,6 @@
     <None Include="Properties\PublishProfiles\controle-d-api - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\controle-d-api - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\controle-d-api - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\controle-d-api - Web Deploy1.pubxml" />
-    <None Include="Properties\PublishProfiles\ControleDApi20200104101549 - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\ControleDApi20200104102147 - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
