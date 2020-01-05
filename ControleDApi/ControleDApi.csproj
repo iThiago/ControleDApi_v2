@@ -207,6 +207,10 @@
     <Compile Include="Migrations\202001051619361_colnmIsTemplateRefeicao.Designer.cs">
       <DependentUpon>202001051619361_colnmIsTemplateRefeicao.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001051648500_colunmQtdInsulinaNoAgendamento.cs" />
+    <Compile Include="Migrations\202001051648500_colunmQtdInsulinaNoAgendamento.Designer.cs">
+      <DependentUpon>202001051648500_colunmQtdInsulinaNoAgendamento.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Agendamento.cs" />
     <Compile Include="Models\AlimentoConsumo.cs" />
@@ -262,6 +266,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001051619361_colnmIsTemplateRefeicao.resx">
       <DependentUpon>202001051619361_colnmIsTemplateRefeicao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001051648500_colunmQtdInsulinaNoAgendamento.resx">
+      <DependentUpon>202001051648500_colunmQtdInsulinaNoAgendamento.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
