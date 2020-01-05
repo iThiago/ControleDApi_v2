@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using ControleDApi;
+using ControleDApi.App_Start;
 
 namespace ControleDApi
 {
@@ -28,7 +30,9 @@ namespace ControleDApi
             config.Formatters.JsonFormatter
                         .SerializerSettings
                         .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-     
+
+            SwaggerConfig.Register();
+
 
             //config.Routes.MapHttpRoute(
             //    name: "DefaultApi",

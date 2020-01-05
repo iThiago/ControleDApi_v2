@@ -36,6 +36,9 @@ namespace ControleDApi.App_Start
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
             app.UseCors(CorsOptions.AllowAll);
             app.UseWebApi(configuration);
+
+            //SwaggerConfig.Register();
+
         }
         private static void ConfigureRotas(HttpConfiguration config)
         {

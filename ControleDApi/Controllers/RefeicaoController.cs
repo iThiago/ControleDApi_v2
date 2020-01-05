@@ -28,7 +28,7 @@ namespace ControleDApi.Controllers
 
         // GET: api/Refeicao/5
         [ResponseType(typeof(Refeicao))]
-        [Route("")]
+        [Route("GetById")]
         public async Task<IHttpActionResult> GetRefeicao(int id)
         {
             Refeicao refeicao = await db.Refeicao.FindAsync(id);

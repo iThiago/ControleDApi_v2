@@ -69,7 +69,6 @@ namespace ControleDApi.Controllers
         [ResponseType(typeof(Usuario))]
         [HttpGet]
         [Route("GetUsuario")]
-        [Route("")]
         public IHttpActionResult GetUsuario(int id)
         {
             Usuario pessoa = db.Users.Find(id);
@@ -83,6 +82,7 @@ namespace ControleDApi.Controllers
 
         // PUT: api/Usuario/5
         [ResponseType(typeof(void))]
+        [HttpPut]
         [Route("")]
         [Route("PutPessoa")]
         [Authorize(Roles = "Administrador,Medico")]

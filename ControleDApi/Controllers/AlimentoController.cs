@@ -71,8 +71,7 @@ namespace ControleDApi.Controllers
         [ResponseType(typeof(Alimento))]
         [HttpGet]
         [Authorize(Roles = "Administrador,Medico,Paciente")]
-        [Route("GetAlimento")]
-        [Route("")]
+        [Route("GetAlimentoById")]
         public IHttpActionResult GetAlimento(int id)
         {
             Alimento alimento = db.Alimento.Find(id);
