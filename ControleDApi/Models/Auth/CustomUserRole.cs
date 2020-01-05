@@ -9,5 +9,7 @@ namespace ControleDApi.Models.Auth
     public class CustomUserRole : IdentityUserRole<int>
     {
         //prop
+        public virtual CustomRole Role { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

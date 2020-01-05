@@ -30,7 +30,7 @@ namespace ControleDApi.Controllers
         // GET: api/Usuario
         [HttpGet]
         [Route("")]
-        public IQueryable<Usuario> GetUsuario()
+        public IQueryable<Usuario> GetUsuario(string nome = "", string roleName = "")
         {
 
             //db.UsuarioRole.Where(x => x.RoleId == EnumRole.Paciente.GetHashCode());
@@ -40,9 +40,18 @@ namespace ControleDApi.Controllers
             // var medico = db.Users.Include(m => m.Usuarios).Where(x => x.Id == usuarioLogado).FirstOrDefault();
 
             // var pacientes = medico.Usuarios;
-            var x = db.Users;
+            var retorno = db.Users.AsQueryable<Usuario>();
 
-            return x;
+            if (!string.IsNullOrWhiteSpace(nome))
+            {
+                retorno = retorno.Where(a => a.NomeCompleto.ToUpper().Contains(nome.ToUpper()));
+            }
+            if (!string.IsNullOrWhiteSpace(roleName))
+            {
+                retorno = retorno.Where(a => a.Roles.Select(r => r.Role.Name.ToUpper()).Contains(roleName.ToUpper()));
+            }
+
+            return retorno.AsNoTracking();
         }
 
         [HttpGet]
@@ -140,7 +149,7 @@ namespace ControleDApi.Controllers
 
             var medico = pessoa.Usuarios.Where(x => x.Id == idMedico).FirstOrDefault();
 
-            if(medico == null)
+            if (medico == null)
                 throw new Exception("Esse paciente não está associado a você.");
 
             pessoa.Usuarios.Remove(medico);
@@ -149,7 +158,7 @@ namespace ControleDApi.Controllers
 
             try
             {
-               bool sucesso =  db.SaveChanges() > 0;
+                bool sucesso = db.SaveChanges() > 0;
                 if (sucesso)
                 {
                     return StatusCode(HttpStatusCode.OK);
@@ -206,7 +215,7 @@ namespace ControleDApi.Controllers
                     if (alterou.Succeeded)
                         return Request.CreateResponse(HttpStatusCode.OK, "Nova senha cadastrada com sucesso!");
                     else
-                        return Request.CreateResponse(HttpStatusCode.OK, string.Join("; ",alterou.Errors));
+                        return Request.CreateResponse(HttpStatusCode.OK, string.Join("; ", alterou.Errors));
                 }
             }
             catch (Exception e)

@@ -21,9 +21,21 @@ namespace ControleDApi.Controllers
 
         [Route("")]
         // GET: api/Refeicao
-        public List<Refeicao> GetRefeicao()
+        public List<Refeicao> GetRefeicao(int idUsuario = 0,bool isTemplate = false)
         {
-            return db.Refeicao.Include(x => x.AlimentosConsumo.Select(y => y.Alimento)).Include(x => x.Usuarios).AsNoTracking().ToList();
+            var retorno = db.Refeicao.Include(x => x.AlimentosConsumo.Select(y => y.Alimento))
+                                     .Include(x => x.Usuarios)
+                                     .Where(x => x.IsTemplate == isTemplate).AsQueryable();
+
+
+
+            if(idUsuario > 0)
+            {
+                retorno = retorno.Where(x => x.Usuarios.Select(u => u.Id).Contains(idUsuario));
+            }
+
+
+            return retorno.AsNoTracking().ToList();
         }
 
         // GET: api/Refeicao/5

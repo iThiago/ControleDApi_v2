@@ -18,6 +18,18 @@ namespace ControleDApi.Models
 
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
+        private string _nomeCompleto;
+        public string NomeCompleto
+        {
+            private set
+            {
+                _nomeCompleto = $"{Nome} {Sobrenome}".Trim();
+            }
+            get
+            {
+                return _nomeCompleto;
+            }
+        }
         public string Senha { get; set; }
         public decimal? QtdInsulinaPorGramaCarbo { get; set; }
         public long Cpf { get; set; }

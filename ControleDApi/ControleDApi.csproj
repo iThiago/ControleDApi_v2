@@ -222,6 +222,14 @@
     <Compile Include="Migrations\202001051648500_colunmQtdInsulinaNoAgendamento.Designer.cs">
       <DependentUpon>202001051648500_colunmQtdInsulinaNoAgendamento.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001052219208_objRoleEUser.cs" />
+    <Compile Include="Migrations\202001052219208_objRoleEUser.Designer.cs">
+      <DependentUpon>202001052219208_objRoleEUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001052238135_colunmNomeCompleto.cs" />
+    <Compile Include="Migrations\202001052238135_colunmNomeCompleto.Designer.cs">
+      <DependentUpon>202001052238135_colunmNomeCompleto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Agendamento.cs" />
     <Compile Include="Models\AlimentoConsumo.cs" />
@@ -281,6 +289,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001051648500_colunmQtdInsulinaNoAgendamento.resx">
       <DependentUpon>202001051648500_colunmQtdInsulinaNoAgendamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001052219208_objRoleEUser.resx">
+      <DependentUpon>202001052219208_objRoleEUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001052238135_colunmNomeCompleto.resx">
+      <DependentUpon>202001052238135_colunmNomeCompleto.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -28,7 +28,7 @@ namespace ControleDApi.Controllers
         //[Authorize(Roles = "Medico")]
         //[Route("GetAlimentos")]
         [Route("")]
-        public IQueryable<Alimento> GetAlimentos()
+        public IQueryable<Alimento> GetAlimentos(string descricao = "")
         {
 
 
@@ -63,8 +63,13 @@ namespace ControleDApi.Controllers
 
             //    throw;
             //}
-            var x = db.Alimento.ToList();
-            return db.Alimento;
+            var retorno = db.Alimento.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(descricao)){
+                retorno = db.Alimento.Where(al => al.Descricao.Contains(descricao));
+            }
+
+            return retorno.AsNoTracking();
         }
 
         // GET: api/Alimento/5
