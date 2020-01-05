@@ -183,6 +183,7 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AlimentoController.cs" />
+    <Compile Include="Controllers\InsulinaController.cs" />
     <Compile Include="Controllers\RefeicaoController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
