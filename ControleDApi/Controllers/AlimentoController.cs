@@ -124,6 +124,7 @@ namespace ControleDApi.Controllers
         [ResponseType(typeof(Alimento))]
         [Authorize(Roles = "Administrador,Medico")]
         [Route("")]
+        [HttpPost]
         public IHttpActionResult PostAlimento(Alimento alimento)
         {
             try
