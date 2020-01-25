@@ -270,8 +270,6 @@
     <Content Include="AlimentosBD\TACO_formatted.xlsx" />
     <Content Include="AlimentosBD\categoryList.json" />
     <Content Include="AlimentosBD\foodList.json" />
-    <None Include="Properties\PublishProfiles\controle-d-api - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\controle-d-api - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\controle-d-api - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
