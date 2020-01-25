@@ -32,40 +32,35 @@ namespace ControleDApi.Controllers
         {
 
 
-            //var caminho = "C:/Users/thiago.nsilva.ABNOTE/Desktop/alimentos.json";
+            //var caminho = "C:/projetos/Backend/C#/ControleDApi_v2/ControleDApi/AlimentosBD/foodList.json";
+            ////var caminho = "C:/projetos/Backend/C#/ControleDApi_v2/ControleDApi/AlimentosBD/categoryList.json";
             //string text = System.IO.File.ReadAllText(caminho);
 
-    //        System.IO.StreamReader file =
-    //new System.IO.StreamReader(caminho);
-
-            var line = "";
-            //try
+            //using (var file =
+            // new System.IO.StreamReader(caminho))
             //{
-
-            //    //while ((line = file.ReadLine()) != null)
-            //    //{
-            //    //    System.Console.WriteLine(line);
-            //    //    // counter++;
-            //    //}
+            //    //var line = "";
 
 
-            //    //JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
-            //    //List<Alimento> alimentos = jsonSerializer.Deserialize<List<Alimento>>(text);
+            //    JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
+            //    List<Alimento> itens = jsonSerializer.Deserialize<List<Alimento>>(text);
+            //    //List<Categoria> itens = jsonSerializer.Deserialize<List<Categoria>>(text);
 
+            //    //itens = itens.Take(50).ToList();
+            //    //itens.AddRange(itens.Skip(150).Take(50).ToList());
 
-            //    //db.Alimento.AddRange(alimentos);
+            //    itens.ForEach(x => x.Carboidrato = x.Carboidrato == null ? new AtributoAlimento { Qtd = 0, Unidade = EnumUnidade.G } : x.Carboidrato);
+            //    db.Alimento.AddRange(itens);
+            //    //db.Categoria.AddRange(itens);
 
-            //    //db.SaveChanges();
+            //    db.SaveChanges();
 
             //}
-            //catch (Exception e)
-            //{
 
-            //    throw;
-            //}
             var retorno = db.Alimento.AsQueryable();
 
-            if (!string.IsNullOrWhiteSpace(descricao)){
+            if (!string.IsNullOrWhiteSpace(descricao))
+            {
                 retorno = db.Alimento.Where(al => al.Descricao.Contains(descricao));
             }
 

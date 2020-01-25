@@ -75,6 +75,8 @@ namespace ControleDApi.DAL
         public DbSet<Refeicao> Refeicao { get; set; }
         public DbSet<Insulina> Insulina { get; set; }
         public DbSet<Agendamento> Agendamento { get; set; }
+        public DbSet<Categoria> Categoria { get; set; }
+        public DbSet<AtributoAlimento> AtributoAlimento { get; set; }
         //public DbSet<CustomUserRole> UsuarioRole { get; set; }
         //public DbSet<Usuario> Usuario { get; set; }
 

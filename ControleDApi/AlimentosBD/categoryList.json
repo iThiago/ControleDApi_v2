@@ -1,0 +1,17 @@
+[
+  { "id": 1, "descricao": "Cereais e derivados" },
+  { "id": 2, "descricao": "Verduras, hortaliças e derivados" },
+  { "id": 3, "descricao": "Frutas e derivados" },
+  { "id": 4, "descricao": "Gorduras e óleos" },
+  { "id": 5, "descricao": "Pescados e frutos do mar" },
+  { "id": 6, "descricao": "Carnes e derivados" },
+  { "id": 7, "descricao": "Leite e derivados" },
+  { "id": 8, "descricao": "Bebidas (alcoólicas e não alcoólicas)" },
+  { "id": 9, "descricao": "Ovos e derivados" },
+  { "id": 10, "descricao": "Produtos açucarados" },
+  { "id": 11, "descricao": "Miscelâneas" },
+  { "id": 12, "descricao": "Outros alimentos industrializados" },
+  { "id": 13, "descricao": "Alimentos preparados" },
+  { "id": 14, "descricao": "Leguminosas e derivados" },
+  { "id": 15, "descricao": "Nozes e sementes" }
+]

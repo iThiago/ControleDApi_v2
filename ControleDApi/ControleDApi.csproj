@@ -230,9 +230,23 @@
     <Compile Include="Migrations\202001052238135_colunmNomeCompleto.Designer.cs">
       <DependentUpon>202001052238135_colunmNomeCompleto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001080137142_ajusteAlimento.cs" />
+    <Compile Include="Migrations\202001080137142_ajusteAlimento.Designer.cs">
+      <DependentUpon>202001080137142_ajusteAlimento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001080149265_cargaCategory.cs" />
+    <Compile Include="Migrations\202001080149265_cargaCategory.Designer.cs">
+      <DependentUpon>202001080149265_cargaCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001080204097_cargaCategoryVdd.cs" />
+    <Compile Include="Migrations\202001080204097_cargaCategoryVdd.Designer.cs">
+      <DependentUpon>202001080204097_cargaCategoryVdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Agendamento.cs" />
     <Compile Include="Models\AlimentoConsumo.cs" />
+    <Compile Include="Models\Categoria.cs" />
+    <Compile Include="Models\AtributoAlimento.cs" />
     <Compile Include="Models\Auth\CustomRole.cs" />
     <Compile Include="Models\Auth\CustomRoleStore.cs" />
     <Compile Include="Models\Auth\CustomUserClaim.cs" />
@@ -254,6 +268,8 @@
     <Content Include="AlimentosBD\TACO_formatted.csv" />
     <Content Include="AlimentosBD\TACO_formatted.json" />
     <Content Include="AlimentosBD\TACO_formatted.xlsx" />
+    <Content Include="AlimentosBD\categoryList.json" />
+    <Content Include="AlimentosBD\foodList.json" />
     <None Include="Properties\PublishProfiles\controle-d-api - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\controle-d-api - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\controle-d-api - Web Deploy.pubxml" />
@@ -295,6 +311,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001052238135_colunmNomeCompleto.resx">
       <DependentUpon>202001052238135_colunmNomeCompleto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001080137142_ajusteAlimento.resx">
+      <DependentUpon>202001080137142_ajusteAlimento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001080149265_cargaCategory.resx">
+      <DependentUpon>202001080149265_cargaCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001080204097_cargaCategoryVdd.resx">
+      <DependentUpon>202001080204097_cargaCategoryVdd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
