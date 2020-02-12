@@ -1,4 +1,5 @@
-﻿using ControleDApi.DAL;
+﻿
+using ControleDApi.DAL;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
@@ -9,6 +10,7 @@ using System.Web;
 using System.Web.Http;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
+using System.Web.Http.Cors;
 
 namespace ControleDApi.App_Start
 {
@@ -16,11 +18,13 @@ namespace ControleDApi.App_Start
     {
         public void Configuration(IAppBuilder app)
         {
-            var configuration = new HttpConfiguration();
-            
-            //ConfigureRotas(configuration);
-            //configuration.EnableCors();
-            
+            var config = new HttpConfiguration();
+
+            //ConfigureRotas(config);
+            //config.EnableCors();
+
+
+
             app.CreatePerOwinContext(Context.Create);
             app.CreatePerOwinContext<AppUserManager>(AppUserManager.Create);
 
@@ -34,8 +38,13 @@ namespace ControleDApi.App_Start
             };
             app.UseOAuthAuthorizationServer(oAuthServerOptions);
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
+
+            //var corsAttr = new EnableCorsAttribute("*", "*", "*");
+            //config.EnableCors(corsAttr);
             app.UseCors(CorsOptions.AllowAll);
-            app.UseWebApi(configuration);
+
+            ConfigureRotas(config);
+            app.UseWebApi(config);
 
             //SwaggerConfig.Register();
 

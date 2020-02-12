@@ -15,13 +15,13 @@ namespace ControleDApi
 
         {
             // Web API configuration and services
-
-            // Web API routes
-            config.MapHttpAttributeRoutes();
-
             //var corsAttr = new EnableCorsAttribute("*", "*", "*");
             //config.EnableCors(corsAttr);
             config.EnableCors();
+            // Web API routes
+            config.MapHttpAttributeRoutes();
+
+          
 
             config.Formatters.Clear();
             config.Formatters.Add(new JsonMediaTypeFormatter());
@@ -34,11 +34,13 @@ namespace ControleDApi
             SwaggerConfig.Register();
 
 
-            //config.Routes.MapHttpRoute(
-            //    name: "DefaultApi",
-            //    routeTemplate: "api/{controller}/{id}",
-            //    defaults: new { id = RouteParameter.Optional }
-            //);
+
+
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
 
             //config.Routes.MapHttpRoute(
             //    name: "DefaultApiAction",
