@@ -64,13 +64,20 @@ namespace ControleDApi.Controllers
                 retorno = db.Alimento.Where(al => al.Descricao.Contains(descricao));
             }
 
-            return retorno.AsNoTracking();
+            return retorno
+                    .Include(x => x.Carboidrato)
+                    .Include(x => x.Proteina)
+                    .Include(x => x.Categoria)
+                    .Include(x => x.FibraAlimentar)
+                    .Include(x => x.Sodio)
+                    .Include(x => x.Potassio)
+                    .AsNoTracking();
         }
 
         // GET: api/Alimento/5
         [ResponseType(typeof(Alimento))]
         [HttpGet]
-        [Authorize(Roles = "Administrador,Medico,Paciente")]
+        //[Authorize(Roles = "Administrador,Medico,Paciente")]
         [Route("{id}")]
         public IHttpActionResult GetAlimento(int id)
         {
@@ -85,7 +92,7 @@ namespace ControleDApi.Controllers
 
         // PUT: api/Alimento/5
         [ResponseType(typeof(void))]
-        [Authorize(Roles = "Administrador,Medico")]
+        //[Authorize(Roles = "Administrador,Medico")]
         [Route("")]
         public IHttpActionResult PutAlimento(int id, Alimento alimento)
         {
@@ -122,7 +129,7 @@ namespace ControleDApi.Controllers
 
         // POST: api/Alimento
         [ResponseType(typeof(Alimento))]
-        [Authorize(Roles = "Administrador,Medico")]
+        //[Authorize(Roles = "Administrador,Medico")]
         [Route("")]
         [HttpPost]
         public IHttpActionResult PostAlimento(Alimento alimento)
@@ -142,7 +149,7 @@ namespace ControleDApi.Controllers
 
         // DELETE: api/Alimento/5
         [ResponseType(typeof(Alimento))]
-        [Authorize(Roles = "Administrador")]
+        //[Authorize(Roles = "Administrador")]
         [Route("")]
         public IHttpActionResult DeleteAlimento(int id)
         {
