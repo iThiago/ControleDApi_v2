@@ -6,14 +6,14 @@ namespace ControleDApi.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class usuariosrefeicoes : IMigrationMetadata
+    [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
+    public sealed partial class initialformysql : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(usuariosrefeicoes));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initialformysql));
         
         string IMigrationMetadata.Id
         {
-            get { return "202001051445459_usuariosrefeicoes"; }
+            get { return "202005291231330_initial-for-mysql"; }
         }
         
         string IMigrationMetadata.Source

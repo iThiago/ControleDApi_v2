@@ -42,6 +42,8 @@ namespace ControleDApi
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
+
             //config.Routes.MapHttpRoute(
             //    name: "DefaultApiAction",
             //    routeTemplate: "api/{controller}/{action}/{id}",

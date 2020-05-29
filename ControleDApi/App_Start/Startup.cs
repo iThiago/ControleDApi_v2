@@ -10,7 +10,9 @@ using System.Web;
 using System.Web.Http;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
-using System.Web.Http.Cors;
+//using MySql.Data.Entity;
+using System.Data.Entity;
+using MySql.Data.EntityFramework;
 
 namespace ControleDApi.App_Start
 {
@@ -42,10 +44,12 @@ namespace ControleDApi.App_Start
             //var corsAttr = new EnableCorsAttribute("*", "*", "*");
             //config.EnableCors(corsAttr);
             app.UseCors(CorsOptions.AllowAll);
+            config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
 
             ConfigureRotas(config);
             app.UseWebApi(config);
 
+            DbConfiguration.SetConfiguration(new MySqlEFConfiguration());
             //SwaggerConfig.Register();
 
         }

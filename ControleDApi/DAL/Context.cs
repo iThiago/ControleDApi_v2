@@ -1,6 +1,7 @@
 ﻿using ControleDApi.Models;
 using ControleDApi.Models.Auth;
 using Microsoft.AspNet.Identity.EntityFramework;
+using MySql.Data.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,6 +11,7 @@ using System.Web;
 
 namespace ControleDApi.DAL
 {
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class Context : IdentityDbContext<Usuario, CustomRole,
     int, CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
@@ -17,7 +19,8 @@ namespace ControleDApi.DAL
         public Context()
             : base("BD_ControleD")
         {
-          //  Database.SetInitializer<Context>(null);
+            Database.SetInitializer<Context>(new DropCreateDatabaseIfModelChanges<Context>());
+            //  Database.SetInitializer<Context>(null);
             Configuration.LazyLoadingEnabled = false;
             Configuration.ProxyCreationEnabled = false;
         }
