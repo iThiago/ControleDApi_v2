@@ -267,7 +267,6 @@
     <Content Include="AlimentosBD\categoryList.json" />
     <Content Include="AlimentosBD\foodList.json" />
     <Content Include="1Docker\Dockerfile" />
-    <Content Include="1Docker\Web.config" />
     <None Include="Properties\PublishProfiles\controle-d-api-2 - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

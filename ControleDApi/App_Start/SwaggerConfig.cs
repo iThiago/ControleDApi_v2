@@ -3,6 +3,7 @@ using WebActivatorEx;
 using ControleDApi;
 using Swashbuckle.Application;
 using ControleDApi.App_Start;
+using System.Net.Http.Formatting;
 
 //[assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
@@ -24,6 +25,8 @@ namespace ControleDApi.App_Start
                 .EnableSwaggerUi(c =>
                 {
                 });
+            GlobalConfiguration.Configuration.Formatters.Clear();
+            GlobalConfiguration.Configuration.Formatters.Add(new JsonMediaTypeFormatter());
         }
         protected static string GetXmlCommentsPath()
         {

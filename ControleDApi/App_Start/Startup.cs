@@ -13,6 +13,7 @@ using Microsoft.Owin.Cors;
 //using MySql.Data.Entity;
 using System.Data.Entity;
 using MySql.Data.EntityFramework;
+using System.Net.Http.Formatting;
 
 namespace ControleDApi.App_Start
 {
@@ -46,11 +47,29 @@ namespace ControleDApi.App_Start
             app.UseCors(CorsOptions.AllowAll);
             config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
 
+            config.Formatters.Clear();
+            config.Formatters.Add(new JsonMediaTypeFormatter());
+
+
+            config.Formatters.JsonFormatter
+                        .SerializerSettings
+                        .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+
             ConfigureRotas(config);
             app.UseWebApi(config);
 
             DbConfiguration.SetConfiguration(new MySqlEFConfiguration());
             //SwaggerConfig.Register();
+
+            GlobalConfiguration.Configuration.Formatters.Clear();
+            GlobalConfiguration.Configuration.Formatters.Add(new JsonMediaTypeFormatter());
+
+            //GlobalConfiguration.Configuration.Formatters.JsonFormatter.MediaTypeMappings
+            //        .Add(new RequestHeaderMapping("Accept",
+            //                  "text/html",
+            //                  StringComparison.InvariantCultureIgnoreCase,
+            //                  true,
+            //                  "application/json"));
 
         }
         private static void ConfigureRotas(HttpConfiguration config)

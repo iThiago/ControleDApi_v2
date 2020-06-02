@@ -10,3 +10,5 @@ RUN Remove-Website -Name 'Default Web Site'; `
 
 COPY ControleDApi/_PublishedWebsites/ControleDApi /web-app
 COPY Web.config /web-app/Web.config
+
+EXPOSE 80/tcp
