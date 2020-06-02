@@ -25,8 +25,8 @@ namespace ControleDApi.App_Start
                 .EnableSwaggerUi(c =>
                 {
                 });
-            GlobalConfiguration.Configuration.Formatters.Clear();
-            GlobalConfiguration.Configuration.Formatters.Add(new JsonMediaTypeFormatter());
+            //GlobalConfiguration.Configuration.Formatters.Clear();
+            //GlobalConfiguration.Configuration.Formatters.Add(new JsonMediaTypeFormatter());
         }
         protected static string GetXmlCommentsPath()
         {

@@ -24,8 +24,8 @@ namespace ControleDApi
 
           
 
-            config.Formatters.Clear();
-            config.Formatters.Add(new JsonMediaTypeFormatter());
+            //config.Formatters.Clear();
+            //config.Formatters.Add(new JsonMediaTypeFormatter());
 
 
             config.Formatters.JsonFormatter

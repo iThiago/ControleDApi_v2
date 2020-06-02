@@ -61,8 +61,8 @@ namespace ControleDApi.App_Start
             DbConfiguration.SetConfiguration(new MySqlEFConfiguration());
             //SwaggerConfig.Register();
 
-            GlobalConfiguration.Configuration.Formatters.Clear();
-            GlobalConfiguration.Configuration.Formatters.Add(new JsonMediaTypeFormatter());
+            //GlobalConfiguration.Configuration.Formatters.Clear();
+            //GlobalConfiguration.Configuration.Formatters.Add(new JsonMediaTypeFormatter());
 
             //GlobalConfiguration.Configuration.Formatters.JsonFormatter.MediaTypeMappings
             //        .Add(new RequestHeaderMapping("Accept",
