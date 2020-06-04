@@ -6,9 +6,9 @@ RUN Set-ItemProperty -path 'HKLM:\SYSTEM\CurrentControlSet\Services\Dnscache\Par
 
 RUN Remove-Website -Name 'Default Web Site'; `
     New-Item -Path 'C:\web-app' -Type Directory; `
-    New-Website -Name 'web-app' -PhysicalPath 'C:\web-app' -Port 80 -Force
+    New-Website -Name 'web-app' -PhysicalPath 'C:\web-app' -Port 8080 -Force
 
 COPY ControleDApi/_PublishedWebsites/ControleDApi /web-app
 COPY Web.config /web-app/Web.config
 
-EXPOSE 80/tcp
+EXPOSE 8080/tcp
