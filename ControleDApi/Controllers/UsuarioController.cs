@@ -44,7 +44,7 @@ namespace ControleDApi.Controllers
 
             if (!string.IsNullOrWhiteSpace(nome))
             {
-                retorno = retorno.Where(a => a.NomeCompleto.ToUpper().Contains(nome.ToUpper()));
+                retorno = retorno.Where(a => a.Nome.ToUpper().Contains(nome.ToUpper()));
             }
             if (!string.IsNullOrWhiteSpace(roleName))
             {

@@ -54,7 +54,9 @@ namespace ControleDApi.App_Start
             config.Formatters.JsonFormatter
                         .SerializerSettings
                         .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-
+            config.Formatters.JsonFormatter
+                       .SerializerSettings
+                       .NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
             ConfigureRotas(config);
             app.UseWebApi(config);
 

@@ -27,7 +27,7 @@ namespace ControleDApi.Models
             }
             get
             {
-                return _nomeCompleto;
+                return string.IsNullOrWhiteSpace(_nomeCompleto) ? $"{Nome} {Sobrenome}".Trim() : _nomeCompleto;
             }
         }
         public string Senha { get; set; }

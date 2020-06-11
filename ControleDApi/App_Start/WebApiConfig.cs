@@ -22,19 +22,8 @@ namespace ControleDApi
             // Web API routes
             config.MapHttpAttributeRoutes();
 
-          
-
-            //config.Formatters.Clear();
-            //config.Formatters.Add(new JsonMediaTypeFormatter());
-
-
-            config.Formatters.JsonFormatter
-                        .SerializerSettings
-                        .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 
             SwaggerConfig.Register();
-
-
 
 
             config.Routes.MapHttpRoute(
