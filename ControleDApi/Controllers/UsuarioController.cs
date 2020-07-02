@@ -30,16 +30,9 @@ namespace ControleDApi.Controllers
         // GET: api/Usuario
         [HttpGet]
         [Route("")]
-        public IQueryable<Usuario> GetUsuario(string nome = "", string roleName = "")
+        public PaginaDTO<Usuario> GetUsuario(string nome = "", string roleName = "", long qtdPorPagina = 10, long pagina = 1)
         {
 
-            //db.UsuarioRole.Where(x => x.RoleId == EnumRole.Paciente.GetHashCode());
-
-            //int usuarioLogado = User.Identity.GetUserId<int>();
-
-            // var medico = db.Users.Include(m => m.Usuarios).Where(x => x.Id == usuarioLogado).FirstOrDefault();
-
-            // var pacientes = medico.Usuarios;
             var retorno = db.Users.AsQueryable<Usuario>();
 
             if (!string.IsNullOrWhiteSpace(nome))
@@ -51,8 +44,28 @@ namespace ControleDApi.Controllers
                 retorno = retorno.Where(a => a.Roles.Select(r => r.Role.Name.ToUpper()).Contains(roleName.ToUpper()));
             }
 
-            return retorno.AsNoTracking();
+            pagina -= 1;
+            var skip = pagina * qtdPorPagina;
+
+
+            var retornoAgrupado = retorno.OrderBy(x => x.Nome)
+                    .Skip((int)skip)
+                    .Take((int)qtdPorPagina)
+                    .AsNoTracking()
+                    .GroupBy(p => new { Total = retorno.Count() })
+                    .FirstOrDefault();
+
+            PaginaDTO<Usuario> retornoPaginado = new PaginaDTO<Usuario>
+            {
+                Total = retornoAgrupado?.Key.Total ?? 0,
+                Itens = retornoAgrupado?.Select(u => u).ToList() ?? new List<Usuario>()
+            };
+
+            return retornoPaginado;
         }
+
+
+
 
         [HttpGet]
         [Route("GetWithSenhaTemporaria")]
@@ -64,13 +77,32 @@ namespace ControleDApi.Controllers
         [HttpGet]
         [Route("GetUsuariosByUserLogado")]
         [Authorize(Roles = "Administrador,Medico")]
-        public List<Usuario> GetUsuariosByUserLogado()
+        public PaginaDTO<Usuario> GetUsuariosByUserLogado(string nome = "", long qtdPorPagina = 10, long pagina = 1)
         {
             var id = User.Identity.GetUserId<int>();
-            var lista = db.Users.Include(x => x.Usuarios).Where(x => x.Usuarios.Select(u => u.Id).Contains(id)).AsNoTracking().ToList();
+            var lista = db.Users.Include(x => x.Usuarios).Where(x => x.Usuarios.Select(u => u.Id).Contains(id)).AsNoTracking().AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(nome))
+                lista.Where(x => x.Nome.ToUpper().Contains(nome.ToUpper()));
+            pagina -= 1;
+            var skip = pagina * qtdPorPagina;
+            lista.Skip((int)skip);
+            lista.Take((int)qtdPorPagina);
             //lista = lista.ToList().SelectMany(x => x.Usuarios.Select(c => c)).ToList();
             //lista = db.Users.Include(x => x.Usuarios).ToList();
-            return lista;
+            var retornoAgrupado = lista.OrderBy(x => x.Nome)
+                    .Skip((int)skip)
+                    .Take((int)qtdPorPagina).AsNoTracking()
+                    .GroupBy(p => new { Total = lista.Count() })
+                    .FirstOrDefault();
+
+            PaginaDTO<Usuario> retornoPaginado = new PaginaDTO<Usuario>
+            {
+                Total = retornoAgrupado.Key.Total,
+                Itens = retornoAgrupado.Select(u => u).ToList()
+            };
+
+            return retornoPaginado;
         }
 
         // GET: api/Usuario/5
@@ -179,6 +211,59 @@ namespace ControleDApi.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        [ResponseType(typeof(void))]
+        [Route("AssociarPaciente")]
+        [Authorize(Roles = "Administrador,Medico")]
+        [HttpPut]
+        public IHttpActionResult AssociarPaciente(int id, Usuario pessoa)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != pessoa.Id)
+            {
+                return BadRequest();
+            }
+
+            pessoa = db.Users.Include(x => x.Usuarios).Where(x => x.Id == pessoa.Id).FirstOrDefault();
+
+            var idMedico = User.Identity.GetUserId<int>();
+
+            var medico = pessoa.Usuarios.Where(x => x.Id == idMedico).FirstOrDefault();
+
+            if (medico != null)
+                throw new Exception("Esse paciente já está associado a você.");
+            medico = db.Users.Include(x => x.Usuarios).FirstOrDefault(x => x.Id == idMedico);
+
+            pessoa.Usuarios.Add(medico);
+
+            db.Entry(pessoa).State = EntityState.Modified;
+
+            try
+            {
+                bool sucesso = db.SaveChanges() > 0;
+                if (sucesso)
+                {
+                    return StatusCode(HttpStatusCode.OK);
+                }
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!PessoaExists(id.ToString()))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
 
         [ResponseType(typeof(void))]
         [HttpPut]
@@ -231,6 +316,7 @@ namespace ControleDApi.Controllers
         [ResponseType(typeof(Usuario))]
         [HttpPost]
         [Route("PostPessoa")]
+        [Authorize(Roles = "Medico,Administrador")]
         public HttpResponseMessage PostPessoa(Usuario usuario)
         {
 
@@ -310,14 +396,17 @@ namespace ControleDApi.Controllers
                 usuario.Senha = Guid.NewGuid().ToString().Substring(0, 6).Replace("-", "1");
                 usuario.senhaTemporaria = true;
 
-                var listPerfisValidos = new Context().Roles.Where(x => x.Name.ToUpper().Contains("PACIENTE")).AsNoTracking().Select(x => x.Id).ToList();
+                if ((!usuario.Roles?.Any()) ?? false)
+                {
+                    var listPerfisValidos = new Context().Roles.Where(x => x.Name.ToUpper().Contains("PACIENTE")).AsNoTracking().ToList();
 
-                var usuarioRole = new CustomUserRole();
+                    var usuarioRole = new CustomUserRole();
 
-                usuarioRole.RoleId = listPerfisValidos.FirstOrDefault();
-                //usuarioRole.
+                    usuarioRole.RoleId = listPerfisValidos.FirstOrDefault().Id;
+                    //usuarioRole.
 
-                usuario.Roles.Add(usuarioRole);
+                    usuario.Roles.Add(usuarioRole);
+                }
 
                 var idUsuarioLogado = Convert.ToInt32(User.Identity.GetUserId());
 

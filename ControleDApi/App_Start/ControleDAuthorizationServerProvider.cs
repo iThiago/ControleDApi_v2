@@ -32,7 +32,7 @@ namespace ControleDApi.App_Start
                 var usuario = await userManager.FindAsync(context.UserName, context.Password);
                 if (usuario == null)
                 {
-                    context.SetError("invalid_grant", "Usuario inválido");
+                    context.SetError("invalid_grant", "Usuario ou senha inválidos");
                     return;
                 }
 

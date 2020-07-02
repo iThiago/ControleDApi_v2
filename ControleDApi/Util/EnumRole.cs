@@ -8,7 +8,7 @@ namespace ControleDApi.Util
     public enum EnumRole
     {
         Administrador = 1,
-        Medico = 2,
-        Paciente = 3
+        Paciente = 2,
+        Medico = 3
     }
 }

@@ -38,5 +38,14 @@ namespace ControleDApi.Models
         public virtual List<Refeicao> Refeicoes { get; set; }
         public bool? senhaTemporaria { get; set; }
         public virtual List<Usuario> Usuarios { get; set; }
+        public DateTime DataNascimento { get; set; }
+        public double Peso { get; set; }
+        public char Sexo { get; set; }
+        public TipoDiabete TipoDiabetes { get; set; }
+    }
+
+    public enum TipoDiabete
+    {
+        Melitus = 10
     }
 }

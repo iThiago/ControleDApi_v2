@@ -13,6 +13,7 @@ using ControleDApi.Models;
 using System.Web.Http.Cors;
 using System.Web.Script.Serialization;
 using ControleDApi.App_Start;
+using ControleDApi.ViewModel;
 
 namespace ControleDApi.Controllers
 {
@@ -28,7 +29,7 @@ namespace ControleDApi.Controllers
         //[Authorize(Roles = "Medico")]
         //[Route("GetAlimentos")]
         [Route("")]
-        public IQueryable<Alimento> GetAlimentos(string descricao = "")
+        public PaginaDTO<Alimento> GetAlimentos(string descricao = "", long qtdPorPagina = 10, long pagina = 1)
         {
 
 
@@ -46,7 +47,7 @@ namespace ControleDApi.Controllers
             //    List<Alimento> itens = jsonSerializer.Deserialize<List<Alimento>>(text);
             //    //List<Categoria> itens = jsonSerializer.Deserialize<List<Categoria>>(text);
 
-            //    //itens = itens.Take(50).ToList();
+            //    itens = itens.Take(300).ToList();
             //    //itens.AddRange(itens.Skip(150).Take(50).ToList());
 
             //    itens.ForEach(x => x.Carboidrato = x.Carboidrato == null ? new AtributoAlimento { Qtd = 0, Unidade = EnumUnidade.G } : x.Carboidrato);
@@ -64,20 +65,37 @@ namespace ControleDApi.Controllers
                 retorno = db.Alimento.Where(al => al.Descricao.Contains(descricao));
             }
 
-            return retorno
+            pagina -= 1;
+            var skip = pagina * qtdPorPagina;
+
+            var retornoAgrupado = retorno
                     .Include(x => x.Carboidrato)
                     .Include(x => x.Proteina)
                     .Include(x => x.Categoria)
                     .Include(x => x.FibraAlimentar)
                     .Include(x => x.Sodio)
                     .Include(x => x.Potassio)
-                    .AsNoTracking();
+                    .OrderBy(x => x.Descricao)
+                    .Skip((int)skip)
+                    .Take((int)qtdPorPagina)
+                    .AsNoTracking()
+                    .GroupBy(p => new { Total = retorno.Count() })
+                    .FirstOrDefault();
+
+
+            PaginaDTO<Alimento> retornoPaginado = new PaginaDTO<Alimento>
+            {
+                Total = retornoAgrupado?.Key.Total ?? 0,
+                Itens = retornoAgrupado?.Select(u => u).ToList() ?? new List<Alimento>()
+            };
+
+            return retornoPaginado;
         }
 
         // GET: api/Alimento/5
         [ResponseType(typeof(Alimento))]
         [HttpGet]
-        //[Authorize(Roles = "Administrador,Medico,Paciente")]
+        [Authorize(Roles = "Administrador,Medico,Paciente")]
         [Route("{id}")]
         public IHttpActionResult GetAlimento(int id)
         {
@@ -92,7 +110,7 @@ namespace ControleDApi.Controllers
 
         // PUT: api/Alimento/5
         [ResponseType(typeof(void))]
-        //[Authorize(Roles = "Administrador,Medico")]
+        [Authorize(Roles = "Administrador,Medico")]
         [Route("")]
         public IHttpActionResult PutAlimento(int id, Alimento alimento)
         {
@@ -129,7 +147,7 @@ namespace ControleDApi.Controllers
 
         // POST: api/Alimento
         [ResponseType(typeof(Alimento))]
-        //[Authorize(Roles = "Administrador,Medico")]
+        [Authorize(Roles = "Administrador,Medico")]
         [Route("")]
         [HttpPost]
         public IHttpActionResult PostAlimento(Alimento alimento)
