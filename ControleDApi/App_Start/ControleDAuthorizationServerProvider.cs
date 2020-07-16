@@ -47,6 +47,8 @@ namespace ControleDApi.App_Start
                 foreach (var role in roles)
                 {
                     identity.AddClaim(new Claim(ClaimTypes.Role, role));
+                    identity.AddClaim(new Claim("QtdInsulinaPorGramaCarbo", usuario.QtdInsulinaPorGramaCarbo.ToString()));
+                    identity.AddClaim(new Claim("Id", usuario.Id.ToString()));
                 }
 
 
@@ -83,7 +85,12 @@ namespace ControleDApi.App_Start
         private static AuthenticationProperties GetProperties(Usuario usuario, IEnumerable<Claim> claims)
         {
             IDictionary<string, string> data = new Dictionary<string, string>();
-            data.Add(new KeyValuePair<string, string>("claims", string.Join(",", claims)));
+            claims?.ToList().ForEach(claim =>
+            {
+                if(!data.ContainsKey(claim.Type))
+                    data.Add(claim.Type, claim.Value);
+            });
+            
             return new AuthenticationProperties(data);
         }
     }

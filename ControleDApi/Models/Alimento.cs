@@ -12,10 +12,11 @@ namespace ControleDApi.Models
         public Alimento()
         {
             this.AlimentosConsumo = new List<AlimentoConsumo>();
+            this.Unidades = new List<AlimentoUnidade>();
         }
 
         public int Id { get; set; }
-        [Required(ErrorMessage = "Descrição é obrigatório!")]
+        [Required(ErrorMessage = "A Descrição é obrigatória!")]
         public string Descricao { get; set; }
         public string UnidadeBase { get; set; }
         public EnumUnidade QtdBase { get; set; }
@@ -72,7 +73,7 @@ namespace ControleDApi.Models
         public virtual AtributoAlimento Niacina { get; set; }
         public int? VitaminaCId { get; set; }
         public virtual AtributoAlimento VitaminaC { get; set; }
-
         public virtual List<AlimentoConsumo> AlimentosConsumo { get; set; }
+        public virtual List<AlimentoUnidade> Unidades { get; set; }
     }
 }

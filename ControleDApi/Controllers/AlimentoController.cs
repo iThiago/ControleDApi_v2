@@ -69,6 +69,7 @@ namespace ControleDApi.Controllers
             var skip = pagina * qtdPorPagina;
 
             var retornoAgrupado = retorno
+                    .Include(x => x.Unidades)
                     .Include(x => x.Carboidrato)
                     .Include(x => x.Proteina)
                     .Include(x => x.Categoria)
@@ -79,6 +80,7 @@ namespace ControleDApi.Controllers
                     .Skip((int)skip)
                     .Take((int)qtdPorPagina)
                     .AsNoTracking()
+                    .ToList()
                     .GroupBy(p => new { Total = retorno.Count() })
                     .FirstOrDefault();
 
@@ -154,6 +156,10 @@ namespace ControleDApi.Controllers
         {
             try
             {
+                //if(alimento.Unidades?.Count > 0)
+                //{
+                //    db.Unidade.AddRange(alimento.Unidades);
+                //}
                 db.Alimento.Add(alimento);
                 db.SaveChanges();
 

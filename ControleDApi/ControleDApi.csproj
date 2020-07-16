@@ -242,9 +242,22 @@
     <Compile Include="Migrations\202006230054165_addColumnTipoDiabetePesoSexoDataNasc.Designer.cs">
       <DependentUpon>202006230054165_addColumnTipoDiabetePesoSexoDataNasc.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007062319125_alimentoUnidades.cs" />
+    <Compile Include="Migrations\202007062319125_alimentoUnidades.Designer.cs">
+      <DependentUpon>202007062319125_alimentoUnidades.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007062340463_ajusteNomeColuna.cs" />
+    <Compile Include="Migrations\202007062340463_ajusteNomeColuna.Designer.cs">
+      <DependentUpon>202007062340463_ajusteNomeColuna.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007150028369_sexoString.cs" />
+    <Compile Include="Migrations\202007150028369_sexoString.Designer.cs">
+      <DependentUpon>202007150028369_sexoString.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Agendamento.cs" />
     <Compile Include="Models\AlimentoConsumo.cs" />
+    <Compile Include="Models\AlimentoUnidade.cs" />
     <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\AtributoAlimento.cs" />
     <Compile Include="Models\Auth\CustomRole.cs" />
@@ -289,6 +302,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006230054165_addColumnTipoDiabetePesoSexoDataNasc.resx">
       <DependentUpon>202006230054165_addColumnTipoDiabetePesoSexoDataNasc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007062319125_alimentoUnidades.resx">
+      <DependentUpon>202007062319125_alimentoUnidades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007062340463_ajusteNomeColuna.resx">
+      <DependentUpon>202007062340463_ajusteNomeColuna.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007150028369_sexoString.resx">
+      <DependentUpon>202007150028369_sexoString.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

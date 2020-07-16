@@ -76,7 +76,7 @@ namespace ControleDApi.Controllers
 
         [HttpGet]
         [Route("GetUsuariosByUserLogado")]
-        [Authorize(Roles = "Administrador,Medico")]
+        [Authorize(Roles = "Administrador,Medico,Paciente")]
         public PaginaDTO<Usuario> GetUsuariosByUserLogado(string nome = "", long qtdPorPagina = 10, long pagina = 1)
         {
             var id = User.Identity.GetUserId<int>();
@@ -98,8 +98,8 @@ namespace ControleDApi.Controllers
 
             PaginaDTO<Usuario> retornoPaginado = new PaginaDTO<Usuario>
             {
-                Total = retornoAgrupado.Key.Total,
-                Itens = retornoAgrupado.Select(u => u).ToList()
+                Total = retornoAgrupado?.Key.Total ?? 0,
+                Itens = retornoAgrupado?.Select(u => u).ToList() ?? new List<Usuario>()
             };
 
             return retornoPaginado;
