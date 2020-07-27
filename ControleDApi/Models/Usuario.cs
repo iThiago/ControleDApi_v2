@@ -14,6 +14,7 @@ namespace ControleDApi.Models
             this.Agendamentos = new List<Agendamento>();
             this.Refeicoes = new List<Refeicao>();
             this.Usuarios = new List<Usuario>();
+            this.UsuarioConfigs = new List<UsuarioConfigInsulina>();
         }
 
         public string Nome { get; set; }
@@ -39,9 +40,10 @@ namespace ControleDApi.Models
         public bool? senhaTemporaria { get; set; }
         public virtual List<Usuario> Usuarios { get; set; }
         public DateTime DataNascimento { get; set; }
-        public double Peso { get; set; }
+        public double? Peso { get; set; }
         public string Sexo { get; set; }
         public TipoDiabete TipoDiabetes { get; set; }
+        public virtual List<UsuarioConfigInsulina> UsuarioConfigs { get; set; }
     }
 
     public enum TipoDiabete

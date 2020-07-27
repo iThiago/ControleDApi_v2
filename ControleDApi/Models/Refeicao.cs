@@ -14,6 +14,7 @@ namespace ControleDApi.Models
         }
         public int Id { get; set; }
         public decimal QtdCarboidrato { get; set; }
+        public int TipoRefeicao { get; set; }
         public decimal QtdInsulina { get; set; }
         public int InsulinaId { get; set; }
         public virtual Insulina Insulina { get; set; }
@@ -21,6 +22,7 @@ namespace ControleDApi.Models
         public virtual List<Usuario> Usuarios { get; set; }
         public virtual List<AlimentoConsumo> AlimentosConsumo { get; set; }
         public bool IsTemplate { get; set; }
+        public DateTime Data { get; set; }
 
     }
 }

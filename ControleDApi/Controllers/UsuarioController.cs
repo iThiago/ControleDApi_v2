@@ -111,7 +111,8 @@ namespace ControleDApi.Controllers
         [Route("{id}")]
         public IHttpActionResult GetUsuario(int id)
         {
-            Usuario pessoa = db.Users.Find(id);
+            Usuario pessoa = db.Users.Include(x => x.UsuarioConfigs.Select(y => y.TipoQtdGlicemia)).AsQueryable().FirstOrDefault(x => x.Id == id);
+            pessoa.UsuarioConfigs = pessoa.UsuarioConfigs.OrderBy(x => x.TipoRefeicao).ThenBy(x => x.TipoQtdGlicemiaId).ToList();
             if (pessoa == null)
             {
                 return NotFound();
@@ -126,17 +127,28 @@ namespace ControleDApi.Controllers
         [Route("")]
         [Route("PutPessoa")]
         [Authorize(Roles = "Administrador,Medico")]
-        public IHttpActionResult PutPessoa(int id, Usuario pessoa)
+        public IHttpActionResult PutPessoa(int id, Usuario pessoaDTO)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != pessoa.Id)
+            if (id != pessoaDTO.Id)
             {
                 return BadRequest();
             }
+
+            var pessoa = db.Users.AsQueryable().Include(x => x.UsuarioConfigs).FirstOrDefault(x => x.Id == id);
+            
+            db.UsuarioConfigInsulina.RemoveRange(pessoa.UsuarioConfigs);
+
+            pessoa.UsuarioConfigs.AddRange(pessoaDTO.UsuarioConfigs);
+
+            pessoa.UsuarioConfigs?.ForEach(x => {
+                x.UsuarioId = id;
+                x.Usuario = null;
+            });
 
             db.Entry(pessoa).State = EntityState.Modified;
 
@@ -316,7 +328,7 @@ namespace ControleDApi.Controllers
         [ResponseType(typeof(Usuario))]
         [HttpPost]
         [Route("PostPessoa")]
-        [Authorize(Roles = "Medico,Administrador")]
+        //[Authorize(Roles = "Medico,Administrador")]
         public HttpResponseMessage PostPessoa(Usuario usuario)
         {
 

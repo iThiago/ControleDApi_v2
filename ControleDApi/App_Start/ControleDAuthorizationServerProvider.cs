@@ -56,6 +56,7 @@ namespace ControleDApi.App_Start
                 var tichet = new AuthenticationTicket(identity, GetProperties(usuario,
                     identity.Claims));
 
+
                 context.Validated(tichet);
             }
             catch (Exception e)

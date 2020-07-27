@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
@@ -21,21 +22,37 @@ namespace ControleDApi.Controllers
 
         [Route("")]
         // GET: api/Refeicao
-        public List<Refeicao> GetRefeicao(int idUsuario = 0,bool isTemplate = false)
+        public List<Refeicao> GetRefeicao(int idUsuario = 0,int tipoRefeicao= 0,DateTime? data = null,bool isTemplate = false)
         {
             var retorno = db.Refeicao.Include(x => x.AlimentosConsumo.Select(y => y.Alimento))
                                      .Include(x => x.Usuarios)
-                                     .Where(x => x.IsTemplate == isTemplate).AsQueryable();
+                                     .Where(x => x.IsTemplate == isTemplate
+                                     ).AsQueryable();
+
+            if(tipoRefeicao > 0)
+            {
+                retorno = retorno.Where(x => x.TipoRefeicao == tipoRefeicao);
+            }
+
+            //if (data != null && data != default(DateTime))
+            //{
+            //    retorno =  retorno.Where(x => DbFunctions.TruncateTime(x.Data) == data);
+            //}
 
 
-
-            if(idUsuario > 0)
+            if (idUsuario > 0)
             {
                 retorno = retorno.Where(x => x.Usuarios.Select(u => u.Id).Contains(idUsuario));
             }
 
+            var list = retorno.AsNoTracking().ToList();
 
-            return retorno.AsNoTracking().ToList();
+            if (data != null && data != default(DateTime))
+            {
+                list = list.Where(x => x.Data == data).ToList();
+            }
+
+            return list;
         }
 
         // GET: api/Refeicao/5
@@ -99,7 +116,28 @@ namespace ControleDApi.Controllers
             }
             try
             {
-                db.Refeicao.Add(refeicao);
+                var refeicaoToSave = new Refeicao
+                {
+                    AlimentosConsumo = refeicao.AlimentosConsumo,
+                    Usuarios = new List<Usuario>(),
+                    InsulinaId = 1,
+                    QtdCarboidrato = refeicao.QtdCarboidrato,
+                    QtdInsulina = refeicao.QtdInsulina,
+                    TipoRefeicao = refeicao.TipoRefeicao,
+                    Data = refeicao.Data
+                };
+
+                foreach (var item in refeicao.Usuarios)
+                {
+                    refeicaoToSave.Usuarios.Add(db.Users.First(x => x.Id == item.Id));
+                }
+                refeicaoToSave.AlimentosConsumo.ForEach(x =>
+                {
+                    x.AlimentoId = x.Alimento?.Id ?? x.AlimentoId;
+                    x.Alimento = null;
+                });
+                
+                db.Refeicao.Add(refeicaoToSave);
                 await db.SaveChangesAsync();
             }
             catch (Exception e)

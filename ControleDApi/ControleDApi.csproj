@@ -225,6 +225,7 @@
     <Compile Include="Controllers\AlimentoController.cs" />
     <Compile Include="Controllers\InsulinaController.cs" />
     <Compile Include="Controllers\RefeicaoController.cs" />
+    <Compile Include="Controllers\TipoQtdGlicemiaController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DAL\AppSignInManeger.cs" />
@@ -254,6 +255,34 @@
     <Compile Include="Migrations\202007150028369_sexoString.Designer.cs">
       <DependentUpon>202007150028369_sexoString.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007171544217_usuarioConfigs.cs" />
+    <Compile Include="Migrations\202007171544217_usuarioConfigs.Designer.cs">
+      <DependentUpon>202007171544217_usuarioConfigs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007181959098_tipoQtdInsulina.cs" />
+    <Compile Include="Migrations\202007181959098_tipoQtdInsulina.Designer.cs">
+      <DependentUpon>202007181959098_tipoQtdInsulina.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007182023376_TipoQtdGlicemia.cs" />
+    <Compile Include="Migrations\202007182023376_TipoQtdGlicemia.Designer.cs">
+      <DependentUpon>202007182023376_TipoQtdGlicemia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007182143275_IdipoQtdGLei.cs" />
+    <Compile Include="Migrations\202007182143275_IdipoQtdGLei.Designer.cs">
+      <DependentUpon>202007182143275_IdipoQtdGLei.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007182148376_AjusteTipoQtdGLicemiaId.cs" />
+    <Compile Include="Migrations\202007182148376_AjusteTipoQtdGLicemiaId.Designer.cs">
+      <DependentUpon>202007182148376_AjusteTipoQtdGLicemiaId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007262123392_tipoRefeicaoColunm.cs" />
+    <Compile Include="Migrations\202007262123392_tipoRefeicaoColunm.Designer.cs">
+      <DependentUpon>202007262123392_tipoRefeicaoColunm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007262147480_dataColumn.cs" />
+    <Compile Include="Migrations\202007262147480_dataColumn.Designer.cs">
+      <DependentUpon>202007262147480_dataColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Agendamento.cs" />
     <Compile Include="Models\AlimentoConsumo.cs" />
@@ -271,6 +300,7 @@
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\Alimento.cs" />
     <Compile Include="Models\Refeicao.cs" />
+    <Compile Include="Models\UsuarioConfigInsulina.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\EnumRole.cs" />
     <Compile Include="ViewModel\CadastroNovaSenhaData.cs" />
@@ -311,6 +341,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007150028369_sexoString.resx">
       <DependentUpon>202007150028369_sexoString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007171544217_usuarioConfigs.resx">
+      <DependentUpon>202007171544217_usuarioConfigs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007181959098_tipoQtdInsulina.resx">
+      <DependentUpon>202007181959098_tipoQtdInsulina.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007182023376_TipoQtdGlicemia.resx">
+      <DependentUpon>202007182023376_TipoQtdGlicemia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007182143275_IdipoQtdGLei.resx">
+      <DependentUpon>202007182143275_IdipoQtdGLei.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007182148376_AjusteTipoQtdGLicemiaId.resx">
+      <DependentUpon>202007182148376_AjusteTipoQtdGLicemiaId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007262123392_tipoRefeicaoColunm.resx">
+      <DependentUpon>202007262123392_tipoRefeicaoColunm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007262147480_dataColumn.resx">
+      <DependentUpon>202007262147480_dataColumn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

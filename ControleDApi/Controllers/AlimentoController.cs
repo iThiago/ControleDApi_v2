@@ -101,7 +101,11 @@ namespace ControleDApi.Controllers
         [Route("{id}")]
         public IHttpActionResult GetAlimento(int id)
         {
-            Alimento alimento = db.Alimento.Find(id);
+            Alimento alimento = db.Alimento.AsQueryable()
+                .Include(x => x.Unidades)
+                .Include(x => x.Carboidrato)
+                .Include(x => x.Proteina)
+                .FirstOrDefault(x => x.Id == id);
             if (alimento == null)
             {
                 return NotFound();
@@ -126,7 +130,20 @@ namespace ControleDApi.Controllers
                 return BadRequest();
             }
 
-            db.Entry(alimento).State = EntityState.Modified;
+            var alimentoBse = db.Alimento.Include(x => x.Unidades)
+                .Include(x => x.Carboidrato)
+                .Include(x => x.Proteina)
+                .FirstOrDefault(x => x.Id == id);
+
+            alimentoBse.Unidades.RemoveAll(x => true);
+            alimentoBse.Descricao = alimento.Descricao;
+            alimentoBse.CategoriaId = alimento.CategoriaId;
+            alimentoBse.Unidades = alimento.Unidades;
+            
+            alimentoBse.Carboidrato.Qtd = alimento.Carboidrato.Qtd;
+            alimentoBse.Proteina.Qtd = alimento.Proteina.Qtd;
+
+            //db.Entry(alimento).State = EntityState.Modified;
 
             try
             {
