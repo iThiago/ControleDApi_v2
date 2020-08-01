@@ -283,6 +283,10 @@
     <Compile Include="Migrations\202007262147480_dataColumn.Designer.cs">
       <DependentUpon>202007262147480_dataColumn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008011456406_camposAtualizadoCadastradoPor.cs" />
+    <Compile Include="Migrations\202008011456406_camposAtualizadoCadastradoPor.Designer.cs">
+      <DependentUpon>202008011456406_camposAtualizadoCadastradoPor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Agendamento.cs" />
     <Compile Include="Models\AlimentoConsumo.cs" />
@@ -362,6 +366,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007262147480_dataColumn.resx">
       <DependentUpon>202007262147480_dataColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008011456406_camposAtualizadoCadastradoPor.resx">
+      <DependentUpon>202008011456406_camposAtualizadoCadastradoPor.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

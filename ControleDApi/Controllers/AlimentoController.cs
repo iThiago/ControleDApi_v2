@@ -49,7 +49,7 @@ namespace ControleDApi.Controllers
 
             //    itens = itens.Take(300).ToList();
             //    //itens.AddRange(itens.Skip(150).Take(50).ToList());
-
+        //TODO: INCLUIR DATA DE ATUALIZACAO E CADASTRADO POR QD FOR ALIMENTO
             //    itens.ForEach(x => x.Carboidrato = x.Carboidrato == null ? new AtributoAlimento { Qtd = 0, Unidade = EnumUnidade.G } : x.Carboidrato);
             //    db.Alimento.AddRange(itens);
             //    //db.Categoria.AddRange(itens);
@@ -142,6 +142,9 @@ namespace ControleDApi.Controllers
             
             alimentoBse.Carboidrato.Qtd = alimento.Carboidrato.Qtd;
             alimentoBse.Proteina.Qtd = alimento.Proteina.Qtd;
+
+            alimentoBse.DataAtualizacao = alimento.DataAtualizacao;
+            alimentoBse.AtualizadoPor = alimento.AtualizadoPor;
 
             //db.Entry(alimento).State = EntityState.Modified;
 

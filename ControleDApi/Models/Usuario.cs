@@ -44,6 +44,28 @@ namespace ControleDApi.Models
         public string Sexo { get; set; }
         public TipoDiabete TipoDiabetes { get; set; }
         public virtual List<UsuarioConfigInsulina> UsuarioConfigs { get; set; }
+        public string AtualizadoPor { get; set; }
+        public string CadastradoPor { get; set; }
+        public DateTime? DataAtualizacao { get; set; }
+
+        public UserBaseDTO ToUserBaseDTO()
+        {
+            return new UserBaseDTO
+            {
+                NomeCompleto = NomeCompleto,
+                Cpf = Cpf,
+                Email = Email,
+                Id = Id
+            };
+        }
+    }
+
+    public class UserBaseDTO
+    {
+        public string NomeCompleto { get; set; }
+        public int Id { get; set; }
+        public long Cpf { get; set; }
+        public string Email { get; set; }
     }
 
     public enum TipoDiabete

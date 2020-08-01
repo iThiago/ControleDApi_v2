@@ -27,7 +27,7 @@ namespace ControleDApi.Controllers
     {
         private Context db = new Context();
 
-        // GET: api/Usuario
+        // GET: api/Usuarioa
         [HttpGet]
         [Route("")]
         public PaginaDTO<Usuario> GetUsuario(string nome = "", string roleName = "", long qtdPorPagina = 10, long pagina = 1)
@@ -47,6 +47,11 @@ namespace ControleDApi.Controllers
             pagina -= 1;
             var skip = pagina * qtdPorPagina;
 
+            foreach (var item in retorno)
+            {
+                item.Senha = null;
+                item.PasswordHash = null;
+            }
 
             var retornoAgrupado = retorno.OrderBy(x => x.Nome)
                     .Skip((int)skip)
@@ -69,9 +74,9 @@ namespace ControleDApi.Controllers
 
         [HttpGet]
         [Route("GetWithSenhaTemporaria")]
-        public List<Usuario> GetWithSenhaTemporaria()
+        public List<UserBaseDTO> GetWithSenhaTemporaria()
         {
-            return db.Users.Where(x => x.senhaTemporaria == true).AsNoTracking().ToList();
+            return db.Users.Where(x => x.senhaTemporaria == true).AsNoTracking().ToList().Select(u => u.ToUserBaseDTO()).ToList();
         }
 
         [HttpGet]
@@ -80,10 +85,16 @@ namespace ControleDApi.Controllers
         public PaginaDTO<Usuario> GetUsuariosByUserLogado(string nome = "", long qtdPorPagina = 10, long pagina = 1)
         {
             var id = User.Identity.GetUserId<int>();
-            var lista = db.Users.Include(x => x.Usuarios).Where(x => x.Usuarios.Select(u => u.Id).Contains(id)).AsNoTracking().AsQueryable();
+            var user = db.Users.Include(x => x.Usuarios).AsNoTracking().FirstOrDefault(x => x.Id == id);
+            var lista = user.Usuarios.AsQueryable();
+            if(lista.Count() == 0)
+            {
+                lista = db.Users.Include(x => x.Usuarios).Where(u => u.Usuarios.Any(us => us.Id == id)).AsNoTracking().AsQueryable();
+            }
+
 
             if (!string.IsNullOrWhiteSpace(nome))
-                lista.Where(x => x.Nome.ToUpper().Contains(nome.ToUpper()));
+                lista = lista.Where(x => x.Nome.ToUpper().Contains(nome.ToUpper()));
             pagina -= 1;
             var skip = pagina * qtdPorPagina;
             lista.Skip((int)skip);
@@ -140,7 +151,17 @@ namespace ControleDApi.Controllers
             }
 
             var pessoa = db.Users.AsQueryable().Include(x => x.UsuarioConfigs).FirstOrDefault(x => x.Id == id);
-            
+
+            pessoa.Nome = pessoaDTO.Nome;
+            pessoa.Peso = pessoaDTO.Peso;
+            pessoa.Email = pessoaDTO.Email;
+            pessoa.DataNascimento = pessoaDTO.DataNascimento;
+            pessoa.Cpf = pessoaDTO.Cpf;
+            pessoa.AtualizadoPor = pessoaDTO.AtualizadoPor;
+            pessoa.DataAtualizacao = pessoaDTO.DataAtualizacao;
+            //pessoa.CadastradoPor = pessoaDTO.CadastradoPor;
+            pessoa.Sexo = pessoaDTO.Sexo;
+
             db.UsuarioConfigInsulina.RemoveRange(pessoa.UsuarioConfigs);
 
             pessoa.UsuarioConfigs.AddRange(pessoaDTO.UsuarioConfigs);
@@ -293,8 +314,8 @@ namespace ControleDApi.Controllers
                 if (!(bool)pessoa.senhaTemporaria)
                     throw new Exception("A senha nova já foi cadastrada anteriormente!");
 
-                if (pessoa.Senha != novaSenhaData.SenhaAnterior)
-                    throw new Exception("Senha inválida! Favor colocar a senha temporária que foi enviada por e-mail!");
+                //if (pessoa.Senha != novaSenhaData.SenhaAnterior)
+                //    throw new Exception("Senha inválida! Favor colocar a senha temporária que foi enviada por e-mail!");
 
 
                 pessoa.senhaTemporaria = false;
@@ -307,12 +328,12 @@ namespace ControleDApi.Controllers
                 {
                     var userManager = Request.GetOwinContext().GetUserManager<AppUserManager>();
 
-                    var alterou = userManager.ChangePassword(pessoa.Id, novaSenhaData.SenhaAnterior, novaSenhaData.NovaSenha);
+                    var alterou = userManager.ChangePassword(pessoa.Id, pessoa.Senha, novaSenhaData.NovaSenha);
 
                     if (alterou.Succeeded)
                         return Request.CreateResponse(HttpStatusCode.OK, "Nova senha cadastrada com sucesso!");
                     else
-                        return Request.CreateResponse(HttpStatusCode.OK, string.Join("; ", alterou.Errors));
+                        return Request.CreateResponse(HttpStatusCode.InternalServerError, string.Join("; ", alterou.Errors));
                 }
             }
             catch (Exception e)

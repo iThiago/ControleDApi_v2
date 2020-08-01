@@ -49,7 +49,7 @@ namespace ControleDApi.Controllers
 
             if (data != null && data != default(DateTime))
             {
-                list = list.Where(x => x.Data == data).ToList();
+                list = list.Where(x => x.Data.Date == data.Value.Date).ToList();
             }
 
             return list;
@@ -124,7 +124,7 @@ namespace ControleDApi.Controllers
                     QtdCarboidrato = refeicao.QtdCarboidrato,
                     QtdInsulina = refeicao.QtdInsulina,
                     TipoRefeicao = refeicao.TipoRefeicao,
-                    Data = refeicao.Data
+                    Data = refeicao.Data.ToLocalTime()
                 };
 
                 foreach (var item in refeicao.Usuarios)

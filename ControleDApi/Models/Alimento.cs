@@ -75,5 +75,8 @@ namespace ControleDApi.Models
         public virtual AtributoAlimento VitaminaC { get; set; }
         public virtual List<AlimentoConsumo> AlimentosConsumo { get; set; }
         public virtual List<AlimentoUnidade> Unidades { get; set; }
+        public string AtualizadoPor { get; set; }
+        public string CadastradoPor { get; set; }
+        public DateTime? DataAtualizacao { get; set; }
     }
 }
